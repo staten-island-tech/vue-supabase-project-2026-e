@@ -1,7 +1,7 @@
 <template>
-    <div>
-
+    <div class="room">
     </div>
+    
 </template>
 
 <script>
