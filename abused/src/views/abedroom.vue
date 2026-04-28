@@ -17,18 +17,18 @@
 }
 
 .child{
-    background-image: url();
+    background-image: url(@/assets/childWalk.png);
     position: absolute;
     height: 20vw;
     width: 20vw;
 }
 
 .walking-ltr{
-    animation: walk 1s steps(4) infinite;
+    animation: walk 0.6s steps(4) infinite;
 }
 .walking-rtl{
     transform: scaleX(-1);
-    animation: walk 1s steps(4) infinite;
+    animation: walk 0.6s steps(4) infinite;
 }
 @keyframes walk {
     from {background-position: 0px;}
