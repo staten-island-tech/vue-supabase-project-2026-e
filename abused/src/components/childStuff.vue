@@ -37,8 +37,8 @@ export default {
 .chair{
     background-image: url(@/assets/childWakeup.png);
     position: absolute;
-    height: 20vw;
-    width: 20vw;
+    height: 800px;
+    width: 500px;
 }
 
 #child{
@@ -58,11 +58,11 @@ export default {
 }
 
 .walking-ltr{
-    animation: walk 0.6s steps(4) infinite;
+    animation: walk 0.6s steps(4);
 }
 .walking-rtl{
     transform: scaleX(-1);
-    animation: walk 0.6s steps(4) infinite;
+    animation: walk 0.6s steps(4);
 }
 
 .open-drawerR{

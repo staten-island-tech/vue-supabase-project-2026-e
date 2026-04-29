@@ -14,11 +14,6 @@ const router = createRouter({
       component: menu,
     },
     {
-      path: '/gameroom',
-      name: 'gameroom',
-      component: Gameroom
-    },
-    {
       path: '/bedroom',
       name: 'bedroom',
       component: Abedroom
