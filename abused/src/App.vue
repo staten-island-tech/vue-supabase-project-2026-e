@@ -1,28 +1,26 @@
 <template>
-  <div>
-
-  </div>
+  <ul>
+    <li v-for="todo in todos" :key="todo.id">{{ todo.name }}</li>
+  </ul>
 </template>
 
-<script>
-import { ref, onMounted } from 'vue'
-import { supabase } from './supabase'
+<script setup>
+  import { ref, onMounted } from 'vue'
+  import { supabase } from '../utils/supabase'
+  
+  const todos = ref([])
 
-const transactions = ref([])
-const error = ref(null)
-
-onMounted(async () => {
-  let { data: transactionData, error: err } = await supabase
-    .from('transactions')
-    .select('*')
-  if (err) {
-    error.value = err.message
-  } else {
-    transactions.value = transactionData
+  async function getTodos() {
+    const { data } = await supabase.from('todos').select()
+    todos.value = data
   }
-})
+
+  onMounted(() => {
+    getTodos()
+  })
 
 </script>
+
 
 <style scoped>
 
