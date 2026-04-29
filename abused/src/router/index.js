@@ -1,3 +1,7 @@
+import Gameroom from '@/components/gameroom.vue'
+import Abedroom from '@/views/abedroom.vue'
+import Basement from '@/views/basement.vue'
+import Garage from '@/views/garage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 
@@ -9,6 +13,26 @@ const router = createRouter({
       name: 'menu',
       component: menu,
     },
+    {
+      path: '/gameroom',
+      name: 'gameroom',
+      component: Gameroom
+    },
+    {
+      path: '/bedroom',
+      name: 'bedroom',
+      component: Abedroom
+    },
+      {
+      path: '/basement',
+      name: 'basement',
+      component: Basement
+    },
+      {
+      path: '/garage',
+      name: 'garage',
+      component: Garage
+    }
   ],
 })
 
