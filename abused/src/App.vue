@@ -1,9 +1,3 @@
-<template>
-  <ul>
-    <li v-for="todo in todos" :key="todo.id">{{ todo.name }}</li>
-  </ul>
-</template>
-
 <script setup>
   import { ref, onMounted } from 'vue'
   import { supabase } from '../utils/supabase'
@@ -21,7 +15,8 @@
 
 </script>
 
-
-<style scoped>
-
-</style>
+<template>
+  <ul>
+    <li v-for="todo in todos" :key="todo.id">{{ todo.name }}</li>
+  </ul>
+</template>
