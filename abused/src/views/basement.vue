@@ -1,11 +1,13 @@
 <template>
     <div>
-
+        <Gameroom/>
     </div>
 </template>
 
 <script>
-import gameroom from '@/components/gameroom.vue';
+import Gameroom from '@/components/gameroom.vue';
+
+
 </script>
 
 <style scoped>
