@@ -1,5 +1,5 @@
 <template>
-
+<img src="@/assets/stellaIdea.png">
 </template>
 
 <script setup>
