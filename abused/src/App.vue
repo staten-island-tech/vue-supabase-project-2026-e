@@ -16,7 +16,5 @@
 </script>
 
 <template>
-  <ul>
-    <li v-for="todo in todos" :key="todo.id">{{ todo.name }}</li>
-  </ul>
+  <RouterView/>
 </template>
