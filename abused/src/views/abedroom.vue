@@ -1,5 +1,7 @@
 <template>
-<div id="child"></div>
+    <room @click="walkTo">
+        <div id="child"></div>
+    </room>
 </template>
 
 <script>
