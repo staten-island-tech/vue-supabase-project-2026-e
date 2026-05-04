@@ -1,52 +1,26 @@
 <template>
-<div class="map-container" @click="walkTo">
-    <div 
-      id="child" 
-      :class ="action"
-      :style="{ top: y + 'px', left: x + 'px' }"
-    ></div>
-</div>
+<div id="child"></div>
 </template>
 
 <script>
-
-export default {
-    data() {
-        return {
-            x: 600, 
-            y: -800,
-            action : stand-tr,
-        };
-    },
-    methods: {
-        walkTo(event) {
-            if(this.x > event.clientX){
-                action = walking-ltr
-            }else{
-                action = walking-rtl
-            }
-            this.x = event.clientX;
-            this.y = event.clientY;
-        }
-    }
-};
 
 </script>
 
 <style scoped>
 .chair{
     background-image: url(@/assets/childWakeup.png);
+    background-size: cover;
     position: absolute;
-    height: 800px;
-    width: 500px;
+    height: 320px;
+    width: 200px;
 }
 
 #child{
     background-image: url(@/assets/childWalk.png);
     background-size: cover;
     position: absolute;
-    height: 800px;
-    width: 500px;
+    height: 320px;
+    width: 200px;
 }
 
 .stand-tl{
@@ -72,14 +46,14 @@ export default {
 
 @keyframes walk {
     from {background-position: 0px;}
-    to {background-position: 1500px;}
+    to {background-position: 600px;}
 }
 @keyframes drawer {
     from{background-position: 0px;}
-    to {background-image: 1000px;}
+    to {background-image: 400px;}
 }
 @keyframes shock {
     from{background-position: 0px;}
-    to{background-position: 1500px;}
+    to{background-position: 600px;}
 }
 </style>
