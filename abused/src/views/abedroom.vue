@@ -1,7 +1,7 @@
 <template>
-    <div class="room" @click="walkTo">
-        <div id="child" :class="action" :style="{left: charX + 'px'}"></div>
-    </div>
+    <div class="room" @click="walkTo" v-if="not">    </div>
+        <div id="child" :class="action" :style="{left: charX + 'px', transition: timeWalk + 's'}"></div>
+
 </template>
 
 <script setup>
@@ -9,18 +9,28 @@ import { ref } from 'vue';
 
 const action = ref("stand-tr")
 const charX = ref(100)
+const timeWalk = ref(0)
+const distance = ref(0)
+const not = ref(true)
 
 const walkTo = async (event) =>{
-    if(charX.value < event.clientX){
+    not.value = true
+    if(charX.value < (event.clientX-100)){
+        distance.value = event.clientX - charX.value
+        timeWalk.value = distance.value/300
         action.value = "walking-ltr"
         setTimeout(()=> {
             action.value = "stand-tr"
-        }, 1000)
+            not.value = false
+        }, timeWalk)
     } else{
+        distance.value = charX.value - event.clientX 
+        timeWalk.value = distance.value/300
         action.value = "walking-rtl"
         setTimeout(()=> {
             action.value = "stand-tl"
-        }, 1000)
+            not.value = false
+        }, timeWalk)
     }
     charX.value = event.clientX - 100
 }
@@ -29,9 +39,11 @@ const walkTo = async (event) =>{
 
 <style scoped>
 .room{
-    width:1000px;
-    height: 700px;
+    width:100vw;
+    height: 70vw;
     background-color: red;
+    cursor: crosshair;
+    overflow: hidden;
 }
 .chair{
     background-image: url(@/assets/childWakeup.png);
@@ -51,7 +63,6 @@ const walkTo = async (event) =>{
 }
 
 .stand-tl{
-    transform: scaleX(-1);
     background-position: 0px;
 }
 .stand-tr{
@@ -59,7 +70,7 @@ const walkTo = async (event) =>{
 }
 
 .walking-ltr{
-    animation: walk 1s steps(4);
+    animation: walk infinite steps(4);
 }
 .walking-rtl{
     transform: scaleX(-1);
