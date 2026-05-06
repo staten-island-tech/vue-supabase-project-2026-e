@@ -1,11 +1,10 @@
 <template>
-    <div>
-        <Gameroom/>
-        <div class="story" v-if="basement">{{ nextLinebasement }}</div>
+    <div class="basement">
+        <Gameroom />
     </div>
 </template>
 
-<script>
+<script setup>
 import Gameroom from '@/components/gameroom.vue';
 
 import {ref, computed, onMounted} from 'vue';
