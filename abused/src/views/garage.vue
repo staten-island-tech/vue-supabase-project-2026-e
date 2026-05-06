@@ -6,7 +6,7 @@
     <div class="box" @click="nextLinemag"></div>
 </template>
 
-<script>
+<script setup>
 import Gameroom from '@/components/gameroom.vue';
 import {ref, computed} from 'vue';
 

@@ -39,6 +39,7 @@ const nextLine = () => {
     margin-top: auto;
     width: 75%;
     height: 10%;
+    background-color: black;
 }
 .inventory {
     margin-top: auto;
