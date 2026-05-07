@@ -1,18 +1,24 @@
 <template>
-    <div>
-        <Gameroom/>
+    <div class="container">
+        <div class="story">
+            <div class="toolbox" @click="nextLinetool">{{ toolboxLines }}</div>
+            <div class="box" @click="nextLinemag"></div>
+        </div>
     </div>
-    <div class="toolbox" @click="nextLinetool"></div>
-    <div class="box" @click="nextLinemag"></div>
+
+
 </template>
 
 <script setup>
-import Gameroom from '@/components/gameroom.vue';
 import {ref, computed} from 'vue';
 
 const toolboxLines = [
     "Who needs car keys when you have this?"
 ];
+
+function lines() {
+    console.log(toolboxLines[0])
+}
 
 const magazineLines = [
     "Oops...That's something for older me to look at."
@@ -33,5 +39,15 @@ const nextLinemag = () => {
 </script>
 
 <style scoped>
-
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: blue;
+}
+.story {
+    bottom: 0;
+    width: 75%;
+    height: 10%;
+    background-color: yellow;
+}
 </style>
