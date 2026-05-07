@@ -1,36 +1,36 @@
 <template>
-    <div class="room" @click="walkTo" v-if="not">    </div>
-        <div id="child" :class="action" :style="{left: charX + 'px', transition: timeWalk + 's'}"></div>
+    <div class="room" @click="walkTo" v-if="noAnimation">    </div>
+        <div id="child" :class="action" :style="{left: charX + 'px', transitionDuration: timeWalk + 's'}"></div>
 
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
-const action = ref("stand-tr")
+const action = ref("walking-ltr")
 const charX = ref(100)
 const timeWalk = ref(0)
 const distance = ref(0)
-const not = ref(true)
+const noAnimation = ref(true)
 
-const walkTo = async (event) =>{
-    not.value = true
+const walkTo = (event) =>{
+    noAnimation.value = false
     if(charX.value < (event.clientX-100)){
         distance.value = event.clientX - charX.value
-        timeWalk.value = distance.value/300
+        timeWalk.value = distance.value/250
         action.value = "walking-ltr"
         setTimeout(()=> {
             action.value = "stand-tr"
-            not.value = false
-        }, timeWalk)
+            noAnimation.value = true
+        }, timeWalk.value*1000)
     } else{
         distance.value = charX.value - event.clientX 
-        timeWalk.value = distance.value/300
-        action.value = "walking-rtl"
+        timeWalk.value = distance.value/250
+        // action.value = "walking-rtl"
         setTimeout(()=> {
-            action.value = "stand-tl"
-            not.value = false
-        }, timeWalk)
+            // action.value = "stand-tl"
+            noAnimation.value = true
+        }, timeWalk.value*1000)
     }
     charX.value = event.clientX - 100
 }
@@ -59,7 +59,7 @@ const walkTo = async (event) =>{
     position: absolute;
     height: 320px;
     width: 200px;
-    top: 300px;
+    top: 200px;
 }
 
 .stand-tl{
@@ -70,11 +70,12 @@ const walkTo = async (event) =>{
 }
 
 .walking-ltr{
-    animation: walk infinite steps(4);
+    background-image: url(@/assets/childWalk.png);
+    animation: walk 1.5s infinite steps(4);
 }
 .walking-rtl{
-    transform: scaleX(-1);
-    animation: walk infinite steps(4);
+    background-image: url(@/assets/childWalk.png);
+    animation: walk 1.5s infinite steps(4);
 }
 
 .open-drawerR{
