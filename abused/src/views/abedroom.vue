@@ -7,7 +7,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const action = ref("walking-ltr")
+const action = ref("stand-tr")
 const charX = ref(100)
 const timeWalk = ref(0)
 const distance = ref(0)
@@ -26,9 +26,9 @@ const walkTo = (event) =>{
     } else{
         distance.value = charX.value - event.clientX 
         timeWalk.value = distance.value/250
-        // action.value = "walking-rtl"
+        action.value = "walking-rtl"
         setTimeout(()=> {
-            // action.value = "stand-tl"
+            action.value = "stand-tl"
             noAnimation.value = true
         }, timeWalk.value*1000)
     }
@@ -41,7 +41,6 @@ const walkTo = (event) =>{
 .room{
     width:100vw;
     height: 70vw;
-    background-color: red;
     cursor: crosshair;
     overflow: hidden;
 }
@@ -71,11 +70,12 @@ const walkTo = (event) =>{
 
 .walking-ltr{
     background-image: url(@/assets/childWalk.png);
-    animation: walk 1.5s infinite steps(4);
+    animation: walk 1s infinite steps(4);
 }
 .walking-rtl{
     background-image: url(@/assets/childWalk.png);
-    animation: walk 1.5s infinite steps(4);
+    transform: scaleX(-1);
+    animation: walk 1s infinite steps(4);
 }
 
 .open-drawerR{
