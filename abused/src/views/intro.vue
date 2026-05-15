@@ -1,14 +1,12 @@
 <template>
     <div class="container">
-        <div class="gameScreen"></div>
-        <div class="story" @mousedown="nextLine"></div>
-        <div class="inventory">Inventory</div>
+        <Gameroom/>
     </div>
 </template>
 
 <script setup>
 import {ref, computed} from 'vue';
-
+import Gameroom from '@/components/gameroom.vue';
 const storyLines = [
     "???: GO TO YOUR ROOM YOU BASTARD",
     "???: AND STOP BEING A WASTE OF SPACE",
@@ -44,7 +42,7 @@ const nextLine = () => {
     height: 20%;
     background-color: burlywood;
 }
-.inventory {
+.toggleInventory {
     margin-top: auto;
     width: 25%;
     height: 20%;
@@ -52,5 +50,8 @@ const nextLine = () => {
     color: white;
     display: grid;
     place-items: center;
+}
+.inventoryPopup {
+    background-color: brown;
 }
 </style>

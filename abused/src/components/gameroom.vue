@@ -2,13 +2,39 @@
     <div class="container">
         <div class="gameScreen"></div>
         <div class="story" @mousedown="nextLine"></div>
-        <div class="inventory"></div>
+        <button class="toggleInventory">
+            {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
+        </button>
+        <div v-if="showInventory" class="inventoryPopup">
+            <h3>Your Items</h3>
+            <ul>
+                <li v-for="(item, index) in inventory" :key="index">
+                    {{ item.name }}
+                </li>
+            </ul>
+            <button @click="toggleInventory">Close</button>
+        </div>
     </div>
 </template>
 
 <script>
-import {ref, computed} from 'vue';
-
+export default {
+  name: "InventoryPopup",
+  data() {
+    return {
+      showInventory: false,
+      inventory: [
+        { name: "item 1", quantity: 1 },
+        { name: "item 2", quantity: 5 }
+      ]
+    };
+  },
+  methods: {
+    toggleInventory() {
+      this.showInventory = !this.showInventory;
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -27,7 +53,7 @@ import {ref, computed} from 'vue';
     height: 20%;
     background-color: burlywood;
 }
-.inventory {
+.toggleInventory {
     margin-top: auto;
     width: 25%;
     height: 20%;
@@ -35,5 +61,8 @@ import {ref, computed} from 'vue';
     color: white;
     display: grid;
     place-items: center;
+}
+.inventoryPopup {
+    background-color: brown;
 }
 </style>
