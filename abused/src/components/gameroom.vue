@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="gameScreen"></div>
-        <div class="story" @mousedown="nextLine">{{ storyText }}</div>
+        <div class="story" @mousedown="nextLine">{{ storyText }}{{ toolboxText }}</div>
         <button class="toggleInventory">
             {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
         </button>
@@ -21,6 +21,8 @@
 export default {
     props: {
         storyText: String,
+        toolboxText: String,
+        magazineText: String,
         nextLine: Function
     },
     data() {
@@ -56,6 +58,9 @@ export default {
     width: 75%;
     height: 20%;
     background-color: burlywood;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .toggleInventory {
     margin-top: auto;

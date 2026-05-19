@@ -1,16 +1,27 @@
 <template>
     <div class="container">
-        <div class="story">
-            <div class="toolbox" @click="nextLinetool">{{ toolboxLines }}</div>
-            <div class="box" @click="nextLinemag"></div>
-        </div>
+        <Gameroom
+            :toolboxText="toolboxLines[currentLine]"
+            :nextLine="nextLine"
+            :magazineText="magazineLines[currentLine]"
+        />
     </div>
 
 
 </template>
 
 <script setup>
+import Gameroom from '@/components/gameroom.vue';
+
 import {ref, computed} from 'vue';
+
+const currentLine = ref(0);
+
+const nextLine = () => {
+    if (currentLine.value < storyLines.length - 1) {
+        currentLine.value++
+    }
+}
 
 const toolboxLines = [
     "Who needs car keys when you have this?"
@@ -22,7 +33,6 @@ const magazineLines = [
     "Oops...That's something for older me to look at."
 ];
 
-const currentLine = ref(0);
 
 const nextLinetool = () => {
     if (currentLine.value < toolboxLines.length - 1) {
@@ -52,4 +62,5 @@ const nextLinemag = () => {
     height: 20%;
     background-color: burlywood;
 }
+
 </style>
