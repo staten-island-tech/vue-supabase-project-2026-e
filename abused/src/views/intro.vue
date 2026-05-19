@@ -14,9 +14,10 @@ const storyLines = [
     "???: GO TO YOUR ROOM YOU BASTARD",
     "???: AND STOP BEING A WASTE OF SPACE",
     "???: GO DO SOMETHING USEFUL IN YOUR LIFE",
-    //insert sound effects (locking child to chair + slamming door + MC opening eyes slowly)
+    "insert sound effects (locking child to chair + slamming door + MC opening eyes slowly)",
     "Mc: Ughhhh, so close to escaping that time",
-    "Mc: Great. Now I'm back to square one."
+    "Mc: Great. Now I'm back to square one.",
+    ""
 ];
 
 const currentLine = ref(0);
