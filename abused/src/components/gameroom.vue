@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="gameScreen"></div>
-        <div class="story" @mousedown="nextLine"></div>
+        <div class="story" @mousedown="nextLine">{{ storyText }}</div>
         <button class="toggleInventory">
             {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
         </button>
@@ -19,22 +19,26 @@
 
 <script>
 export default {
-  name: "InventoryPopup",
-  data() {
-    return {
-      showInventory: false,
-      inventory: [
-        { name: "item 1", quantity: 1 },
-        { name: "item 2", quantity: 5 }
-      ]
-    };
-  },
-  methods: {
-    toggleInventory() {
-      this.showInventory = !this.showInventory;
+    props: {
+        storyText: String,
+        nextLine: Function
+    },
+    data() {
+        return {
+            showInventory: false,
+
+            inventory: [
+                { name: "item 1", quantity: 1 },
+                { name: "item 2", quantity: 5 }
+            ]
+        }
+    },
+    methods: {
+        toggleInventory() {
+            this.showInventory = !this.showInventory
+        }
     }
-  }
-};
+}
 </script>
 
 <style scoped>

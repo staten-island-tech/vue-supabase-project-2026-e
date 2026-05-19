@@ -1,6 +1,9 @@
 <template>
     <div class="container">
-        <Gameroom/>
+        <Gameroom
+            :storyText="storyLines[currentLine]"
+            :nextLine="nextLine"
+        />
     </div>
 </template>
 
@@ -27,31 +30,5 @@ const nextLine = () => {
 </script>
 
 <style scoped>
-.container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-}
-.gameScreen {
-    height: 80%;
-}
-.story {
-    margin-top: auto;
-    width: 75%;
-    height: 20%;
-    background-color: burlywood;
-}
-.toggleInventory {
-    margin-top: auto;
-    width: 25%;
-    height: 20%;
-    background-color: blue;
-    color: white;
-    display: grid;
-    place-items: center;
-}
-.inventoryPopup {
-    background-color: brown;
-}
+
 </style>
