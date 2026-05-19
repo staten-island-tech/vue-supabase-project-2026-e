@@ -1,9 +1,9 @@
 <template>
+    <div class="space" @click="walkTo" v-if="noAnimation"></div>
     <div id="child" :class="action" :style="{left: charX + 'px', transitionDuration: timeWalk + 's'}"></div>
 </template>
 
-<script>
-
+<script setup>
 import { ref } from 'vue';
 
 const action = ref("stand-tr")
@@ -12,7 +12,7 @@ const timeWalk = ref(0)
 const distance = ref(0)
 const noAnimation = ref(true)
 
-function walkTo (event) {
+const walkTo = (event) =>{
     noAnimation.value = false
     if(charX.value < (event.clientX-100)){
         distance.value = event.clientX - charX.value
@@ -37,6 +37,13 @@ function walkTo (event) {
 </script>
 
 <style scoped>
+.space{
+    width:100vw;
+    height: 70vw;
+    cursor: crosshair;
+    overflow: hidden;
+}
+
 .chair{
     background-image: url(@/assets/childWakeup.png);
     background-size: cover;
