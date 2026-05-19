@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
+
         <div class="gameScreen"></div>
-        <div class="story" @mousedown="nextLine">{{ storyText }}{{ toolboxText }}</div>
+        <div class="story" @mousedown="nextLine">{{ storyText }}{{ toolboxText }}{{magazineText}}{{ basementText }}</div>
         <button class="toggleInventory">
             {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
         </button>
@@ -14,7 +14,7 @@
             </ul>
             <button @click="toggleInventory">Close</button>
         </div>
-    </div>
+
 </template>
 
 <script>
@@ -23,6 +23,7 @@ export default {
         storyText: String,
         toolboxText: String,
         magazineText: String,
+        basementText: String,
         nextLine: Function
     },
     data() {
@@ -49,6 +50,7 @@ export default {
     width: 100vw;
     height: 100vh;
     background-color: black;
+
 }
 .gameScreen {
     height: 80%;
@@ -61,6 +63,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    bottom: 0;
 }
 .toggleInventory {
     margin-top: auto;
@@ -70,6 +74,9 @@ export default {
     color: white;
     display: grid;
     place-items: center;
+    position: absolute;
+    bottom: 0;
+    right:0;
 }
 .inventoryPopup {
     background-color: brown;

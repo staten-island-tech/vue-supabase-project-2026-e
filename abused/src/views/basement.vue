@@ -1,6 +1,9 @@
 <template>
     <div class="basement">
-        <Gameroom />
+        <Gameroom 
+        :basementText="basementLine[currentLine]"
+        :nextLine="nextLine"
+        />
     </div>
 </template>
 
@@ -10,6 +13,7 @@ import Gameroom from '@/components/gameroom.vue';
 import {ref, computed, onMounted} from 'vue';
 
 const basement = ref(false);
+const currentLine = ref(0)
 const basementLine = [
     "As crusty as ever"
 ]
@@ -25,11 +29,5 @@ onMounted(() => {
 </script>
 
 <style scoped>
-#child{
-    background-image: url(@/assets/childWalk.png);
-    background-size: cover;
-    position: absolute;
-    height: 320px;
-    width: 200px;
-}
+
 </style>

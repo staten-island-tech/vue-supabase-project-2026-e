@@ -5,6 +5,7 @@
             :nextLine="nextLine"
             :magazineText="magazineLines[currentLine]"
         />
+        <childWalker/>
     </div>
 
 
@@ -12,6 +13,7 @@
 
 <script setup>
 import Gameroom from '@/components/gameroom.vue';
+import childWalker from '@/components/childWalker.vue';
 
 import {ref, computed} from 'vue';
 
@@ -34,7 +36,7 @@ const magazineLines = [
 ];
 
 
-const nextLinetool = () => {
+/* const nextLinetool = () => {
     if (currentLine.value < toolboxLines.length - 1) {
         currentLine.value++
     }
@@ -43,7 +45,7 @@ const nextLinemag = () => {
     if (currentLine.value < magazineLines.length - 1) {
         currentLine.value++
     }
-}
+} */
 </script>
 
 <style scoped>
@@ -51,7 +53,6 @@ const nextLinemag = () => {
     display: flex;
     width: 100vw;
     height: 100vh;
-    background-color: black;
 }
 .gameScreen {
     height: 80%;
