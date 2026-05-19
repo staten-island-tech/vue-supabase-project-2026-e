@@ -16,9 +16,7 @@ const toolboxLines = [
     "Who needs car keys when you have this?"
 ];
 
-function lines() {
-    console.log(toolboxLines[0])
-}
+
 
 const magazineLines = [
     "Oops...That's something for older me to look at."
@@ -40,14 +38,18 @@ const nextLinemag = () => {
 
 <style scoped>
 .container {
+    display: flex;
     width: 100vw;
     height: 100vh;
-    background-color: blue;
+    background-color: black;
+}
+.gameScreen {
+    height: 80%;
 }
 .story {
-    bottom: 0;
+    margin-top: auto;
     width: 75%;
-    height: 10%;
-    background-color: yellow;
+    height: 20%;
+    background-color: burlywood;
 }
 </style>

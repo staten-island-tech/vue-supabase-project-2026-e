@@ -1,14 +1,15 @@
 <template>
     <div class="container">
-        <div class="gameScreen"></div>
-        <div class="story" @mousedown="nextLine"></div>
-        <div class="inventory">Inventory</div>
+        <Gameroom
+            :storyText="storyLines[currentLine]"
+            :nextLine="nextLine"
+        />
     </div>
 </template>
 
 <script setup>
 import {ref, computed} from 'vue';
-
+import Gameroom from '@/components/gameroom.vue';
 const storyLines = [
     "???: GO TO YOUR ROOM YOU BASTARD",
     "???: AND STOP BEING A WASTE OF SPACE",
@@ -29,28 +30,5 @@ const nextLine = () => {
 </script>
 
 <style scoped>
-.container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-}
-.gameScreen {
-    height: 80%;
-}
-.story {
-    margin-top: auto;
-    width: 75%;
-    height: 20%;
-    background-color: burlywood;
-}
-.inventory {
-    margin-top: auto;
-    width: 25%;
-    height: 20%;
-    background-color: blue;
-    color: white;
-    display: grid;
-    place-items: center;
-}
+
 </style>
