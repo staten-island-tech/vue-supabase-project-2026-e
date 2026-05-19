@@ -38,18 +38,11 @@ const walkTo = (event) =>{
 
 <style scoped>
 .space{
+    position:absolute;
     width:100vw;
     height: 70vw;
     cursor: crosshair;
     overflow: hidden;
-}
-
-.chair{
-    background-image: url(@/assets/childWakeup.png);
-    background-size: cover;
-    position: absolute;
-    height: 320px;
-    width: 200px;
 }
 
 #child{
