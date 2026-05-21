@@ -1,18 +1,22 @@
 <template>
-    <div id="chair" :class="mode"></div>
+    <div id="chair" class="waking-up" v-if="props.doneCutscene"></div>
+    <div id="chair" class="out-of-chair" v-if="props.free"></div>
 </template>
 
 <script setup>
 
-
+const props = defineProps([free, doneCutscene])
 
 </script>
 
 <style scoped>
 #chair{
     background-image: url(@/assets/childWakeup.png);
+    background-position: 0px;
     background-size: cover;
     position: absolute;
+    top:400px;
+    left:20px;
     height: 320px;
     width: 200px;
 }
@@ -20,6 +24,10 @@
 .waking-up{
     background-image: url(@/assets/childWakeup.png);
     animation: woketh 4s steps 9 forwards;
+}
+
+.out-of-chair{
+    background-image: url();
 }
 
 @keyframes woketh {
