@@ -48,8 +48,8 @@ export default {
 .gameScreen {
     position: absolute;
     background-color: black;
-    height: 900px;
-    width: 2000px;
+    height: 1097px;
+    width: 1920px;
     background-image: url(@/assets/garagebg.png);
 }
 .story {
