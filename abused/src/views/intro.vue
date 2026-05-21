@@ -4,12 +4,14 @@
             :storyText="storyLines[currentLine]"
             :nextLine="nextLine"
         />
+        <ChairThing/>
     </div>
 </template>
 
 <script setup>
 import {ref, computed} from 'vue';
 import Gameroom from '@/components/gameroom.vue';
+import ChairThing from '@/components/chairThing.vue';
 const storyLines = [
     "???: GO TO YOUR ROOM YOU BASTARD",
     "???: AND STOP BEING A WASTE OF SPACE",

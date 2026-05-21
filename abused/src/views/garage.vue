@@ -53,10 +53,7 @@ const nextLinemag = () => {
     width: 100vw;
     height: 100vh;
 }
-.gameScreen {
-    height: 80%;
-    background-image: url(assets/garagebg.png);
-}
+
 .story {
     margin-top: auto;
     width: 75%;

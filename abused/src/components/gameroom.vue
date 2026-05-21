@@ -46,8 +46,11 @@ export default {
 
 <style scoped>
 .gameScreen {
-    height: 80%;
-    background-image: url(assets/garagebg.png);
+    position: absolute;
+    background-color: black;
+    height: 900px;
+    width: 2000px;
+    background-image: url(@/assets/garagebg.png);
 }
 .story {
     margin-top: auto;
