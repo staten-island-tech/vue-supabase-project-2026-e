@@ -3,7 +3,6 @@
         <Gameroom
             :toolboxText="toolboxLines[currentLine]"
             :nextLine="nextLine"
-            :magazineText="magazineLines[currentLine]"
         />
         <childWalker/>
     </div>
@@ -56,6 +55,7 @@ const nextLinemag = () => {
 }
 .gameScreen {
     height: 80%;
+    background-image: url(assets/garagebg.png);
 }
 .story {
     margin-top: auto;

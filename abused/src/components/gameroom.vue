@@ -2,7 +2,7 @@
 
         <div class="gameScreen"></div>
         <div class="story" @mousedown="nextLine">{{ storyText }}{{ toolboxText }}{{magazineText}}{{ basementText }}</div>
-        <button class="toggleInventory">
+        <button class="toggleInventory" @click="toggleInventory">
             {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
         </button>
         <div v-if="showInventory" class="inventoryPopup">
@@ -31,8 +31,8 @@ export default {
             showInventory: false,
 
             inventory: [
-                { name: "item 1", quantity: 1 },
-                { name: "item 2", quantity: 5 }
+/*                 { name: "item 1", quantity: 1 },
+                { name: "item 2", quantity: 5 } */
             ]
         }
     },
@@ -45,15 +45,9 @@ export default {
 </script>
 
 <style scoped>
-.container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-
-}
 .gameScreen {
     height: 80%;
+    background-image: url(assets/garagebg.png);
 }
 .story {
     margin-top: auto;
@@ -80,5 +74,8 @@ export default {
 }
 .inventoryPopup {
     background-color: brown;
+    position: absolute;
+    height: 75%;
+    width: 100%
 }
 </style>

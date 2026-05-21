@@ -1,5 +1,6 @@
 <template>
     <div class="basement">
+        <ChildWalker/>
         <Gameroom 
         :basementText="basementLine[currentLine]"
         :nextLine="nextLine"
@@ -8,6 +9,7 @@
 </template>
 
 <script setup>
+import ChildWalker from '@/components/childWalker.vue';
 import Gameroom from '@/components/gameroom.vue';
 
 import {ref, computed, onMounted} from 'vue';
