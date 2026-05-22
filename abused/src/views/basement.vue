@@ -19,11 +19,6 @@ const currentLine = ref(0)
 const basementLine = [
     "As crusty as ever"
 ]
-const nextLinebasement = () => {
-    if (currentLine.value < basementLine.length - 1) {
-        currentLine.value++
-    }
-}
 
 onMounted(() => {
     basement.value = true;
