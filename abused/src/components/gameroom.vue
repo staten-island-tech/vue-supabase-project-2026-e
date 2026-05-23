@@ -1,6 +1,8 @@
 <template>
 
-        <div class="gameScreen"></div>
+        <div class="gameScreen" 
+            :style="{ backgroundImage: `url(${backgroundImage})` }">
+        </div>
         <div class="story" @mousedown="nextLine">{{ storyText }}{{ toolboxText }}{{magazineText}}{{ basementText }}</div>
         <button class="toggleInventory" @click="toggleInventory">
             {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
@@ -24,7 +26,8 @@ export default {
         toolboxText: String,
         magazineText: String,
         basementText: String,
-        nextLine: Function
+        nextLine: Function,
+        backgroundImage: String
     },
     data() {
         return {
@@ -48,9 +51,9 @@ export default {
 .gameScreen {
     position: absolute;
     background-color: black;
-    height: 1097px;
-    width: 1920px;
-    background-image: url(@/assets/garagebg.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .story {
     margin-top: auto;

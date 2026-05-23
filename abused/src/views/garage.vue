@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <Gameroom
+            :backgroundImage="garageBg"
             :toolboxText="toolboxLines[currentLine]"
             :nextLine="nextLine"
         />
@@ -13,7 +14,7 @@
 <script setup>
 import Gameroom from '@/components/gameroom.vue';
 import childWalker from '@/components/childWalker.vue';
-
+import garageBg from '@/assets/garagebg.png'
 import {ref, computed} from 'vue';
 
 const currentLine = ref(0);

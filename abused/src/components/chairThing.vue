@@ -5,7 +5,10 @@
 
 <script setup>
 
-const props = defineProps([free, doneCutscene])
+const props = defineProps({
+    free: Boolean,
+    doneCutscene: Boolean
+})
 
 </script>
 

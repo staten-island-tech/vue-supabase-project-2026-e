@@ -1,7 +1,8 @@
 <template>
     <div class="basement">
         <ChildWalker/>
-        <Gameroom 
+        <Gameroom
+        :backgroundImage="basementBg" 
         :basementText="basementLine[currentLine]"
         :nextLine="nextLine"
         />
@@ -11,7 +12,7 @@
 <script setup>
 import ChildWalker from '@/components/childWalker.vue';
 import Gameroom from '@/components/gameroom.vue';
-
+import basementBg from '@/assets/basementbg.png';
 import {ref, computed, onMounted} from 'vue';
 
 const basement = ref(false);

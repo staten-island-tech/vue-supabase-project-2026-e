@@ -19,12 +19,6 @@ import ChairThing from '@/components/chairThing.vue';
 const free = ref(false);
 const doneCutscene = ref(false);
 
-function startCutscene() {
-    if (storyLines[currentLine.value] === "insert sound effects (locking child to chair + slamming door + MC opening eyes slowly)") {
-        doneCutscene.value = true;
-    }
-}
-
 const storyLines = [
     "???: GO TO YOUR ROOM YOU BASTARD",
     "???: AND STOP BEING A WASTE OF SPACE",
@@ -40,6 +34,9 @@ const currentLine = ref(0);
 const nextLine = () => {
     if (currentLine.value < storyLines.length - 1) {
         currentLine.value++
+    }
+    if (storyLines[currentLine.value] === ""){
+        doneCutscene.value = true;
     }
 }
 
