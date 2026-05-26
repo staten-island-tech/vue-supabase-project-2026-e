@@ -50,13 +50,16 @@ export default {
 <style scoped>
 .gameScreen {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 110vh;
     background-color: black;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 .story {
-    margin-top: auto;
     width: 75%;
     height: 20%;
     background-color: burlywood;
@@ -67,7 +70,6 @@ export default {
     bottom: 0;
 }
 .toggleInventory {
-    margin-top: auto;
     width: 25%;
     height: 20%;
     background-color: blue;

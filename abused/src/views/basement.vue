@@ -1,11 +1,11 @@
 <template>
     <div class="basement">
-        <ChildWalker/>
         <Gameroom
         :backgroundImage="basementBg" 
         :basementText="basementLine[currentLine]"
         :nextLine="nextLine"
         />
+        <ChildWalker class="child-walker"/>
     </div>
 </template>
 
@@ -26,6 +26,9 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-
+<style>
+.child-walker {
+    position: absolute;
+    margin-top: auto;
+}
 </style>
