@@ -27,8 +27,5 @@ onMounted(() => {
 </script>
 
 <style>
-.child-walker {
-    position: absolute;
-    margin-top: auto;
-}
+
 </style>

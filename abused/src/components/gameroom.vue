@@ -1,22 +1,24 @@
 <template>
-
+    <div class="gameContainer">
         <div class="gameScreen" 
-            :style="{ backgroundImage: `url(${backgroundImage})` }">
+        :style="{ backgroundImage: `url(${backgroundImage})` }">
         </div>
-        <div class="story" @mousedown="nextLine">{{ storyText }}{{ toolboxText }}{{magazineText}}{{ basementText }}</div>
-        <button class="toggleInventory" @click="toggleInventory">
-            {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
-        </button>
+        <div class="controlsArea">
+            <div class="story" @mousedown="nextLine">{{ storyText }}{{ toolboxText }}{{magazineText}}{{ basementText }}</div>
+            <button class="toggleInventory" @click="toggleInventory">
+                {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
+            </button>
+        </div>
         <div v-if="showInventory" class="inventoryPopup">
-            <h3>Your Items</h3>
-            <ul>
-                <li v-for="(item, index) in inventory" :key="index">
-                    {{ item.name }}
-                </li>
-            </ul>
-            <button @click="toggleInventory">Close</button>
+                <h3>Your Items</h3>
+                <ul>
+                    <li v-for="(item, index) in inventory" :key="index">
+                        {{ item.name }}
+                    </li>
+                </ul>
+                <button @click="toggleInventory">Close</button>
         </div>
-
+    </div>
 </template>
 
 <script>
@@ -48,42 +50,43 @@ export default {
 </script>
 
 <style scoped>
+.gameContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
 .gameScreen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 110vh;
+    flex: 1;
     background-color: black;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    position: relative;
+}
+.controlsArea {
+    display: flex;
+    height: 20%;
 }
 .story {
-    width: 75%;
-    height: 20%;
+    flex: 3;
     background-color: burlywood;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    bottom: 0;
 }
 .toggleInventory {
-    width: 25%;
-    height: 20%;
+    flex: 1;
     background-color: blue;
     color: white;
-    display: grid;
-    place-items: center;
-    position: absolute;
-    bottom: 0;
-    right:0;
+    cursor: pointer;
 }
 .inventoryPopup {
     background-color: brown;
-    position: absolute;
+    position: fixed;
     height: 75%;
-    width: 100%
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
 }
 </style>

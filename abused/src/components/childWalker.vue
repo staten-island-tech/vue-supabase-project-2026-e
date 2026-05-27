@@ -40,7 +40,7 @@ const walkTo = (event) =>{
 .space{
     position:absolute;
     width:100vw;
-    height: 70vw;
+    height: 100vw;
     cursor: crosshair;
     overflow: hidden;
 }
@@ -51,7 +51,8 @@ const walkTo = (event) =>{
     position: absolute;
     height: 320px;
     width: 200px;
-    top: 200px;
+    top: calc(100vh - 400px);
+    bottom: 20%;
 }
 
 .stand-tl{
