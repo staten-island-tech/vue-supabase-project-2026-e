@@ -79,15 +79,15 @@ const walkTo = (event) =>{
 
 @keyframes walk {
     from {background-position: 0px;}
-    to {background-position: 800px;}
+    to {background-position: 1600px;}
 }
 @keyframes drawer {
     from{background-position: 0px;}
-    to {background-image: 600px;}
+    to {background-image: 1200px;}
 }
 @keyframes shock {
     from{background-position: 0px;}
-    to{background-position: 800px;}
+    to{background-position: 1600px;}
 }
 @keyframes look-left{
     from{transform: scaleX(1);}

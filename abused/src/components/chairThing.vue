@@ -5,10 +5,7 @@
 
 <script setup>
 
-const props = defineProps({
-    free: Boolean,
-    doneCutscene: Boolean
-})
+// const props = defineProps([free, doneCutscene])
 
 </script>
 
@@ -20,8 +17,8 @@ const props = defineProps({
     position: absolute;
     top:400px;
     left:20px;
-    height: 320px;
-    width: 200px;
+    height: 640px;
+    width: 400px;
 }
 
 .waking-up{
@@ -35,6 +32,6 @@ const props = defineProps({
 
 @keyframes woketh {
     from{background-position: 0px;}
-    to{background-position: 1800px;}
+    to{background-position: 3600px;}
 }
 </style>
