@@ -5,7 +5,7 @@
 
 <script setup>
 
-const props = defineProps([free, doneCutscene])
+// const props = defineProps([free, doneCutscene])
 
 </script>
 
