@@ -8,11 +8,16 @@
             :free="free"
             :doneCutscene="doneCutscene"
         />
+        <div v-if="doneCutscene">
+            <button>
+                <router-link to="/basement">Next room</router-link>
+            </button>
+        </div>
     </div>
 </template>
 
 <script setup>
-import {ref, computed} from 'vue';
+import {ref} from 'vue';
 import Gameroom from '@/components/gameroom.vue';
 import ChairThing from '@/components/chairThing.vue';
 

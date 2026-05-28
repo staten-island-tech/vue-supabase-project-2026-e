@@ -1,10 +1,11 @@
 <template>
-    <div class="gameContainer">
         <div class="gameScreen" 
         :style="{ backgroundImage: `url(${backgroundImage})` }">
         </div>
         <div class="controlsArea">
-            <div class="story" @mousedown="nextLine">{{ storyText }}{{ toolboxText }}{{magazineText}}{{ basementText }}</div>
+            <div class="story" @mousedown="nextLine">
+                {{ storyText }}{{ toolboxText }}{{magazineText}}{{ basementText }}
+            </div>
             <button class="toggleInventory" @click="toggleInventory">
                 {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
             </button>
@@ -18,7 +19,6 @@
                 </ul>
                 <button @click="toggleInventory">Close</button>
         </div>
-    </div>
 </template>
 
 <script>
@@ -50,35 +50,42 @@ export default {
 </script>
 
 <style scoped>
-.gameContainer {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
+
 .gameScreen {
-    flex: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
     background-color: black;
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: center center;
     background-repeat: no-repeat;
-    position: relative;
 }
 .controlsArea {
     display: flex;
     height: 20%;
 }
 .story {
-    flex: 3;
+    width: 75%;
+    height: 20%;
     background-color: burlywood;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    bottom: 0;
 }
 .toggleInventory {
-    flex: 1;
+    width: 25%;
+    height: 20%;
     background-color: blue;
     color: white;
-    cursor: pointer;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    bottom: 0;
+    right:0;
 }
 .inventoryPopup {
     background-color: brown;
@@ -87,6 +94,5 @@ export default {
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 10;
 }
 </style>
