@@ -8,11 +8,7 @@
             :free="free"
             :doneCutscene="doneCutscene"
         />
-        <div v-if="doneCutscene">
-            <button>
-                <router-link to="/basement">Next room</router-link>
-            </button>
-        </div>
+
     </div>
 </template>
 

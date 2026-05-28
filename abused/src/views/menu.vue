@@ -1,14 +1,16 @@
 <template>
-<button class="button">
-    <span class="button_lg">
-        <span class="button_sl"></span>
-        <span class="button_text">Start Game</span>
-    </span>
-</button>
+<RouterLink to="/intro">
+    <button class="button">
+        <span class="button_lg">
+            <span class="button_sl"></span>
+            <span class="button_text">Start Game</span>
+        </span>
+    </button>
+</RouterLink>
 </template>
 
 <script setup>
-
+import { RouterLink } from 'vue-router';
 
 </script>
 

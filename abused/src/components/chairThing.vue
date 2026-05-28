@@ -5,7 +5,10 @@
 
 <script setup>
 
-// const props = defineProps([free, doneCutscene])
+const props = defineProps({
+    free: Boolean,
+    doneCutscene: Boolean
+})
 
 </script>
 
@@ -17,8 +20,8 @@
     position: absolute;
     top:400px;
     left:20px;
-    height: 640px;
-    width: 400px;
+    height: 400px;
+    width: 250px;
 }
 
 .waking-up{

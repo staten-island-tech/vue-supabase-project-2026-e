@@ -78,7 +78,7 @@ const walkTo = (event) =>{
 
 @keyframes walk {
     from {background-position: 0px;}
-    to {background-position: 1600px;}
+    to {background-position: 800px;}
 }
 @keyframes drawer {
     from{background-position: 0px;}
