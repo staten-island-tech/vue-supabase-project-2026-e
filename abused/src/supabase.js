@@ -10,3 +10,7 @@ const {
   data: { user },
 } = await supabase.auth.getUser()
 let metadata = user?.user_metadata
+
+supabase.auth.signInWithOAuth({
+  provider: 'google',
+})
