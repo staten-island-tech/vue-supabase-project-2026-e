@@ -5,7 +5,8 @@
             :toolboxText="toolboxLines[currentLine]"
             :nextLine="nextLine"
         />
-        <childWalker/>
+        <img @click="magazineText" src="@/assets/box.png" alt="">
+        <childWalker/>    
     </div>
 
 
@@ -50,16 +51,21 @@ const nextLinemag = () => {
 
 <style scoped>
 .container {
+    position: relative;
     display: flex;
     width: 100vw;
     height: 100vh;
 }
-
 .story {
     margin-top: auto;
     width: 75%;
     height: 20%;
     background-color: burlywood;
 }
-
+img {
+    position: absolute;
+    cursor: grab;
+    bottom: 0;
+    right: 0;
+}
 </style>
