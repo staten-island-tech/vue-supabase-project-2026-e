@@ -1,16 +1,33 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-export const supabase = createClient(supabaseUrl, supabasePublishableKey)
+async function signInWithGoogle() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: 'http://localhost:3000/', //post login page 
+    },
+  })
+}
+
+/*
+https://supabase.com/docs/reference/javascript/admin-api
+
+*************************FETCH
+const { data, error } = await supabase
+  .from('characters')
+  .select()
 
 
-const {
-  data: { user },
-} = await supabase.auth.getUser()
-let metadata = user?.user_metadata
+*************************UPDATE
+const { error } = await supabase
+  .from('instruments')
+  .update({ name: 'piano' })
+  .eq('id', 1)
 
-supabase.auth.signInWithOAuth({
-  provider: 'google',
-})
+***************************INSERT
+const { error } = await supabase
+  .from('countries')
+  .insert({ id: 1, name: 'Mordor' })
+*/
