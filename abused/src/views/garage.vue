@@ -2,10 +2,12 @@
     <div class="container">
         <Gameroom
             :backgroundImage="garageBg"
-            :toolboxText="toolboxLines[currentLine]"
+            :toolboxText="displayToolboxText"
+            :magazineText="displayMagazineText"
             :nextLine="nextLine"
         />
-        <img @click="magazineText" src="@/assets/box.png" alt="">
+        <img @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
+        <img @click="showMagazine" src="@/assets/box.png" alt="magazine">
         <childWalker/>    
     </div>
 
@@ -19,6 +21,8 @@ import garageBg from '@/assets/garagebg.png'
 import {ref, computed} from 'vue';
 
 const currentLine = ref(0);
+const displayToolboxText = ref("");
+const displayMagazineText = ref("");
 
 const nextLine = () => {
     if (currentLine.value < storyLines.length - 1) {
@@ -30,23 +34,18 @@ const toolboxLines = [
     "Who needs car keys when you have this?"
 ];
 
-
-
 const magazineLines = [
     "Oops...That's something for older me to look at."
 ];
 
-
-/* const nextLinetool = () => {
-    if (currentLine.value < toolboxLines.length - 1) {
-        currentLine.value++
-    }
+const showToolbox = () => {
+    displayToolboxText.value = toolboxLines[0];
 }
-const nextLinemag = () => {
-    if (currentLine.value < magazineLines.length - 1) {
-        currentLine.value++
-    }
-} */
+
+const showMagazine = () => {
+    displayMagazineText.value = magazineLines[0];
+}
+
 </script>
 
 <style scoped>

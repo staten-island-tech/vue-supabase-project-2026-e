@@ -8,7 +8,9 @@
             :free="free"
             :doneCutscene="doneCutscene"
         />
-
+        <div v-if="doneCutscene" class="next-link">
+            <router-link to="/bedroom">Next</router-link>
+        </div>
     </div>
 </template>
 
@@ -44,5 +46,22 @@ const nextLine = () => {
 </script>
 
 <style scoped>
+.next-link {
+    margin-top: 2rem;
+    text-align: center;
+}
 
+.next-link a {
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.next-link a:hover {
+    background-color: #0056b3;
+}
 </style>
