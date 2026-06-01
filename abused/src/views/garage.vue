@@ -6,12 +6,14 @@
             :magazineText="displayMagazineText"
             :nextLine="nextLine"
         />
+        <childWalker/>    
         <img class="toolbox" @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
         <img class="magazine" @click="showMagazine" src="@/assets/box.png" alt="magazine">
-        <childWalker/>    
+        <img class="keypad" @click="showThing" src="@/assets/keypad.png" alt="keypad">
+        <div v-if="displayKeypad === true" class="password">
+            <input type="number"></input>
+        </div>
     </div>
-
-
 </template>
 
 <script setup>
@@ -23,6 +25,7 @@ import {ref, computed} from 'vue';
 const currentLine = ref(0);
 const displayToolboxText = ref("");
 const displayMagazineText = ref("");
+const displayKeypad = ref(false)
 
 const nextLine = () => {
     if (currentLine.value < storyLines.length - 1) {
@@ -48,6 +51,9 @@ const showMagazine = () => {
     displayToolboxText.value = null;
 }
 
+const showThing = () => {
+    displayKeypad.value = true;
+}
 </script>
 
 <style scoped>
@@ -68,11 +74,25 @@ img {
     cursor: grab;
 }
 .toolbox {
-    z-index: 1;
+    width: 20%;
+    height: 15%;
+    bottom: 30%;
+    right: 30%;
 }
 .magazine {
-    width: 50px;
-    height: 50px;
-    bottom: 310px;
+    width: 20%;
+    height: 15%;
+    bottom: 30%;
+    right: 5%;
+}
+.keypad {
+    width: 8%;
+    height: 10%;
+    bottom: 50%;
+    right: 18%;
+}
+.password {
+    position: absolute;
+    background-color: aliceblue;
 }
 </style>
