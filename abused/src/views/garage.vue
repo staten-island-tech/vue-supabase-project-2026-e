@@ -6,8 +6,8 @@
             :magazineText="displayMagazineText"
             :nextLine="nextLine"
         />
-        <img @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
-        <img @click="showMagazine" src="@/assets/box.png" alt="magazine">
+        <img class="toolbox" @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
+        <img class="magazine" @click="showMagazine" src="@/assets/box.png" alt="magazine">
         <childWalker/>    
     </div>
 
@@ -40,10 +40,12 @@ const magazineLines = [
 
 const showToolbox = () => {
     displayToolboxText.value = toolboxLines[0];
+    displayMagazineText.value = null;
 }
 
 const showMagazine = () => {
     displayMagazineText.value = magazineLines[0];
+    displayToolboxText.value = null;
 }
 
 </script>
@@ -64,7 +66,13 @@ const showMagazine = () => {
 img {
     position: absolute;
     cursor: grab;
-    bottom: 0;
-    right: 0;
+}
+.toolbox {
+    z-index: 1;
+}
+.magazine {
+    width: 50px;
+    height: 50px;
+    bottom: 310px;
 }
 </style>
