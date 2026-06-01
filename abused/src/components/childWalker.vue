@@ -49,8 +49,8 @@ const walkTo = (event) =>{
     background-image: url(@/assets/childWalk.png);
     background-size: cover;
     position: absolute;
-    height: 640px;
-    width: 400px;
+    height: 320px;
+    width: 200px;
     top: 200px;
 }
 
@@ -78,7 +78,7 @@ const walkTo = (event) =>{
 
 @keyframes walk {
     from {background-position: 0px;}
-    to {background-position: 1600px;}
+    to {background-position: 800px;}
 }
 @keyframes drawer {
     from{background-position: 0px;}

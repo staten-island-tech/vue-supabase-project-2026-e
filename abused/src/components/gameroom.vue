@@ -1,20 +1,24 @@
 <template>
-
-        <div class="gameScreen"></div>
-        <div class="story" @mousedown="nextLine">{{ storyText }}{{ toolboxText }}{{magazineText}}{{ basementText }}</div>
-        <button class="toggleInventory" @click="toggleInventory">
-            {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
-        </button>
-        <div v-if="showInventory" class="inventoryPopup">
-            <h3>Your Items</h3>
-            <ul>
-                <li v-for="(item, index) in inventory" :key="index">
-                    {{ item.name }}
-                </li>
-            </ul>
-            <button @click="toggleInventory">Close</button>
+        <div class="gameScreen" 
+        :style="{ backgroundImage: `url(${backgroundImage})` }">
         </div>
-
+        <div class="controlsArea">
+            <div class="story" @mousedown="nextLine">
+                {{ storyText }}{{ toolboxText }}{{magazineText}}{{ basementText }}
+            </div>
+            <button class="toggleInventory" @click="toggleInventory">
+                {{ showInventory ? 'Close Inventory' : 'Open Inventory' }}
+            </button>
+        </div>
+        <div v-if="showInventory" class="inventoryPopup">
+                <h3>Your Items</h3>
+                <ul>
+                    <li v-for="(item, index) in inventory" :key="index">
+                        {{ item.name }}
+                    </li>
+                </ul>
+                <button @click="toggleInventory">Close</button>
+        </div>
 </template>
 
 <script>
@@ -24,7 +28,8 @@ export default {
         toolboxText: String,
         magazineText: String,
         basementText: String,
-        nextLine: Function
+        nextLine: Function,
+        backgroundImage: String
     },
     data() {
         return {
@@ -45,15 +50,23 @@ export default {
 </script>
 
 <style scoped>
+
 .gameScreen {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
     background-color: black;
-    height: 1097px;
-    width: 1920px;
-    background-image: url(@/assets/garagebg.png);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.controlsArea {
+    display: flex;
+    height: 20%;
 }
 .story {
-    margin-top: auto;
     width: 75%;
     height: 20%;
     background-color: burlywood;
@@ -64,7 +77,6 @@ export default {
     bottom: 0;
 }
 .toggleInventory {
-    margin-top: auto;
     width: 25%;
     height: 20%;
     background-color: blue;
@@ -77,8 +89,10 @@ export default {
 }
 .inventoryPopup {
     background-color: brown;
-    position: absolute;
+    position: fixed;
     height: 75%;
-    width: 100%
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 </style>
