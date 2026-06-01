@@ -1,17 +1,49 @@
 <template>
-<RouterLink to="/intro">
-    <button class="button">
-        <span class="button_lg">
-            <span class="button_sl"></span>
-            <span class="button_text">Start Game</span>
-        </span>
-    </button>
-</RouterLink>
+<button class="button" @click="signIn">
+    <span class="button_lg">
+        <span class="button_sl"></span>
+        <span class="button_text">PLAY</span>
+    </span>
+</button>
+
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
+import { supabase } from '@/supabase'
 
+async function signIn(){
+    const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            redirectTo: `${window.location.origin}/auth/callback`,
+        }
+    ,})
+    if(error) {
+        console.error('OAuth error:', error)
+    }
+}
+
+
+/*
+https://supabase.com/docs/reference/javascript/admin-api
+
+*************************FETCH
+const { data, error } = await supabase
+  .from('characters')
+  .select()
+
+
+*************************UPDATE
+const { error } = await supabase
+  .from('instruments')
+  .update({ name: 'piano' })
+  .eq('id', 1)
+
+***************************INSERT
+const { error } = await supabase
+  .from('countries')
+  .insert({ id: 1, name: 'Mordor' })
+*/
 </script>
 
 <style scoped>
