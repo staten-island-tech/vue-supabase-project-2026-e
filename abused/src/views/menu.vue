@@ -10,18 +10,78 @@
 
 <script setup>
 import { supabase } from '@/supabase'
+import { onBeforeMount, onMounted, ref } from 'vue';
 
 async function signIn(){
     const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: `${window.location.origin}/auth/callback`,
         }
     ,})
     if(error) {
         console.error('OAuth error:', error)
     }
 }
+
+const loading = ref(true)
+const loggedIn = ref(false)
+const exists = ref(false)
+const user = ref(null)
+
+async function checkTable() {
+  const {data: {user: authUser}, error: userError} = await supabase.auth.getUser()
+  if (userError) throw userError
+  loggedIn.value = !!authUser
+  user.value = authUser
+  if(!authUser){
+    exists.value = false
+  }
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq(email)   
+    .maybeSingle()
+  
+  if (error) throw error
+  existsInTable.value = !!data
+  profileRow.value = data
+}
+
+onMounted(async () => {
+  try{
+    await
+    checkUserInTable()
+  } catch (e) {
+    console.error('Auth/table check failed:', e) 
+    isLoggedIn.value = false
+    existsInTable.value = false
+  } finally{
+      loading.value = false
+  }
+  unsubscribe = supabase.auth.onAuthStateChange(async(event) => {
+    if(event === 'INITIAL_SESSION' || event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        loading.value = true     
+    try{       
+      await checkUserInTable()
+    } catch (e) {
+      console.error('Auth/table check failed:', e)
+      existsInTable.value = false
+    } finally {
+      loading.value = false
+      }
+    }
+  })
+})
+
+
+onBeforeUnmount(() => {
+  unsubscribe?.data?.subscription?.unsubscribe?.()
+  
+// If your supabase-js version returns a different shape, tell me and I’ll adjust.
+
+})
+
 
 
 /*
