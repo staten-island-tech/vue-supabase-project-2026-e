@@ -9,10 +9,6 @@
         <childWalker/>    
         <img class="toolbox" @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
         <img class="magazine" @click="showMagazine" src="@/assets/box.png" alt="magazine">
-        <img class="keypad" @click="showThing" src="@/assets/keypad.png" alt="keypad">
-        <div v-if="displayKeypad === true" class="password">
-            <input type="number"></input>
-        </div>
     </div>
 </template>
 
@@ -25,7 +21,7 @@ import {ref, computed} from 'vue';
 const currentLine = ref(0);
 const displayToolboxText = ref("");
 const displayMagazineText = ref("");
-const displayKeypad = ref(false)
+
 
 const nextLine = () => {
     if (currentLine.value < storyLines.length - 1) {
@@ -51,9 +47,6 @@ const showMagazine = () => {
     displayToolboxText.value = null;
 }
 
-const showThing = () => {
-    displayKeypad.value = true;
-}
 </script>
 
 <style scoped>
@@ -70,29 +63,24 @@ const showThing = () => {
     background-color: burlywood;
 }
 img {
-    position: absolute;
-    cursor: grab;
+     position: absolute;
+     cursor: grab;
+     will-change: transform;
 }
 .toolbox {
-    width: 20%;
-    height: 15%;
-    bottom: 30%;
-    right: 30%;
+     width: 12vw;
+     max-width: 160px;
+     height: auto;
+     left: 70%;
+     top: 70%;
+     transform: translate(-50%, -50%);
 }
 .magazine {
-    width: 20%;
-    height: 15%;
-    bottom: 30%;
-    right: 5%;
-}
-.keypad {
-    width: 8%;
-    height: 10%;
-    bottom: 50%;
-    right: 18%;
-}
-.password {
-    position: absolute;
-    background-color: aliceblue;
+     width: 12vw;
+     max-width: 160px;
+     height: auto;
+     left: 85%;
+     top: 70%;
+     transform: translate(-50%, -50%);
 }
 </style>

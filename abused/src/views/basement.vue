@@ -1,11 +1,13 @@
 <template>
     <div class="basement">
         <Gameroom
-        :backgroundImage="basementBg" 
-        :basementText="basementLine[currentLine]"
-        :nextLine="nextLine"
+            :backgroundImage="basementBg" 
+            :basementText="basementLine[currentLine]"
+            :nextLine="nextLine"
         />
         <ChildWalker class="child-walker"/>
+        <img class="door" @click="openDoor" src="@/assets/door.png" alt="">
+        <input type="text" inputmode="numeric">
     </div>
 </template>
 
@@ -24,8 +26,27 @@ const basementLine = [
 onMounted(() => {
     basement.value = true;
 })
+
+const open = ref(false);
+const openDoor = () => {
+    open.value = true;
+}
 </script>
 
 <style>
-
+.basement {
+    position: relative;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+.door {
+    position: absolute;
+    cursor: pointer;
+    left: 3%;
+    top: 8%;
+    transform: rotate(88deg);
+    width: 30vw;
+    height: 30vh;
+}
 </style>
