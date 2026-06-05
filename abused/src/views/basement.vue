@@ -10,7 +10,7 @@
             class="door" 
             :class="{ 'door-open': doorOpen }"
             @click="openDoor" 
-            :src="doorOpen ? require('@/assets/door-open.png') : require('@/assets/door.png')" 
+            src="@/assets/door.png"
             alt="door"
         >
         <div v-if="open" class="keypad-overlay">
@@ -35,6 +35,11 @@
                 </div>
             </div>
         </div>
+        <div v-if="finishedBase">
+            <button class="link">
+                <router-link to="/garage">Next Room</router-link>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -57,7 +62,8 @@ onMounted(() => {
 const open = ref(false);
 const keypadInput = ref('');
 const doorOpen = ref(false);
-const correctCode = '1234';
+const correctCode = '0125';
+const finishedBase = ref(false);
 
 const openDoor = () => {
     if (!doorOpen.value) {
@@ -84,6 +90,7 @@ const clearInput = () => {
 const submitCode = () => {
     if (keypadInput.value === correctCode) {
         doorOpen.value = true;
+        finishedBase.value = true;
         closeDoor();
     } else {
         alert('Incorrect code. Try again.');
@@ -103,10 +110,10 @@ const submitCode = () => {
 .door {
     position: absolute;
     cursor: pointer;
-    left: 3%;
-    top: 8%;
+    left: 5%;
+    top: 6%;
     transform: rotate(88deg);
-    width: 30vw;
+    width: 25vw;
     height: 30vh;
     transition: transform 0.3s ease;
 }
@@ -232,5 +239,13 @@ const submitCode = () => {
 
 .close-btn:hover {
     background-color: #d00;
+}
+
+.link {
+    color: white;
+    width: 400px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
 }
 </style>
