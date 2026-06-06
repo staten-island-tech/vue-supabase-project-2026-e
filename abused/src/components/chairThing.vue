@@ -30,7 +30,7 @@ const props = defineProps({
 }
 
 .out-of-chair{
-    background-image: url();
+    background-image: url(@/assets/chair.png);
 }
 
 @keyframes woketh {

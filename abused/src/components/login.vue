@@ -10,16 +10,31 @@
 
 
 <script setup>
-import { supabase } from '@/supabase'
+import { supabase } from '@/supabase.js'
+import { ref } from 'vue'
+
+const loggedIn = ref(false)
 
 async function signIn(){
-    const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-    })
-    if(error) {
-        console.error('OAuth error:', error)
-    }
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+  })
+  if(error) {
+    console.error('OAuth error:', error)
+  } 
+
+  const { data: { user }, er }  = await supabase.auth.getUser()
+  const {info, err} = await supabase.from('users').select('*').eq('email', user.email).maybeSingle()
+  if(!info||err){
+    const { error } = await supabase.from('users').insert({ email: user.email, stage:'intro' })
+    redirect('/intro')
+  } else{
+    const {dat, error} = await supabase.from('users').select('stage').eq('email', user.email)
+    redirect(`/${dat.stage}`)
+  }
 }
+
+
 </script>
 
 
@@ -38,7 +53,7 @@ async function signIn(){
   margin-bottom: 20px;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 24px;
   transition: all .15s ease;
 }
 
