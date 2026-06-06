@@ -9,7 +9,9 @@
             :doneCutscene="doneCutscene"
         />
         <div v-if="doneCutscene" class="next-link">
-            <router-link to="/bedroom">Next</router-link>
+            <button>
+                <router-link to="/bedroom">Next</router-link>
+            </button>
         </div>
     </div>
 </template>
@@ -47,21 +49,20 @@ const nextLine = () => {
 
 <style scoped>
 .next-link {
-    margin-top: 2rem;
-    text-align: center;
-}
-
-.next-link a {
-    padding: 0.75rem 1.5rem;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 200px;
+    height: 60px;
+    background-color: #0f0;
+    border: none;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
-    display: inline-block;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.next-link a:hover {
-    background-color: #0056b3;
-}
 </style>

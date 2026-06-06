@@ -5,24 +5,35 @@
             :toolboxText="displayToolboxText"
             :magazineText="displayMagazineText"
             :nextLine="nextLine"
+            :inventory="inventory"
         />
-        <img @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
-        <img @click="showMagazine" src="@/assets/box.png" alt="magazine">
         <childWalker/>    
+        <img class="toolbox" @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
+        <img class="magazine" @click="showMagazine" src="@/assets/box.png" alt="magazine">
+        <div v-if="openBox">
+            
+        </div>
     </div>
-
-
 </template>
 
 <script setup>
 import Gameroom from '@/components/gameroom.vue';
 import childWalker from '@/components/childWalker.vue';
 import garageBg from '@/assets/garagebg.png'
-import {ref, computed} from 'vue';
+import {ref, computed, watch} from 'vue';
 
 const currentLine = ref(0);
 const displayToolboxText = ref("");
 const displayMagazineText = ref("");
+const openBox = ref(false);
+const inventory = ref([]);
+
+watch(openBox, (newVal) => {
+    if (newVal && !inventory.value(item => item.name === "screw driver")) {
+        inventory.value.push({ name: "screw driver", quantity: 1 });
+    }
+});
+
 
 const nextLine = () => {
     if (currentLine.value < storyLines.length - 1) {
@@ -40,10 +51,13 @@ const magazineLines = [
 
 const showToolbox = () => {
     displayToolboxText.value = toolboxLines[0];
+    displayMagazineText.value = null;
+    openBox.value = true;
 }
 
 const showMagazine = () => {
     displayMagazineText.value = magazineLines[0];
+    displayToolboxText.value = null;
 }
 
 </script>
@@ -62,9 +76,24 @@ const showMagazine = () => {
     background-color: burlywood;
 }
 img {
-    position: absolute;
-    cursor: grab;
-    bottom: 0;
-    right: 0;
+     position: absolute;
+     cursor: grab;
+     will-change: transform;
+}
+.toolbox {
+     width: 12vw;
+     max-width: 160px;
+     height: auto;
+     left: 70%;
+     top: 70%;
+     transform: translate(-50%, -50%);
+}
+.magazine {
+     width: 12vw;
+     max-width: 160px;
+     height: auto;
+     left: 85%;
+     top: 70%;
+     transform: translate(-50%, -50%);
 }
 </style>
