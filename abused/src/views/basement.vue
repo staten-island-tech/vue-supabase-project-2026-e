@@ -242,10 +242,20 @@ const submitCode = () => {
 }
 
 .link {
-    color: white;
-    width: 400px;
-    height: 200px;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 200px;
+  height: 60px;
+  background-color: #0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 </style>

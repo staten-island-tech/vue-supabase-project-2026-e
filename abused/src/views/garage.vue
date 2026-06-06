@@ -5,10 +5,14 @@
             :toolboxText="displayToolboxText"
             :magazineText="displayMagazineText"
             :nextLine="nextLine"
+            :inventory="inventory"
         />
         <childWalker/>    
         <img class="toolbox" @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
         <img class="magazine" @click="showMagazine" src="@/assets/box.png" alt="magazine">
+        <div v-if="openBox">
+            
+        </div>
     </div>
 </template>
 
@@ -16,11 +20,19 @@
 import Gameroom from '@/components/gameroom.vue';
 import childWalker from '@/components/childWalker.vue';
 import garageBg from '@/assets/garagebg.png'
-import {ref, computed} from 'vue';
+import {ref, computed, watch} from 'vue';
 
 const currentLine = ref(0);
 const displayToolboxText = ref("");
 const displayMagazineText = ref("");
+const openBox = ref(false);
+const inventory = ref([]);
+
+watch(openBox, (newVal) => {
+    if (newVal && !inventory.value(item => item.name === "screw driver")) {
+        inventory.value.push({ name: "screw driver", quantity: 1 });
+    }
+});
 
 
 const nextLine = () => {
@@ -40,6 +52,7 @@ const magazineLines = [
 const showToolbox = () => {
     displayToolboxText.value = toolboxLines[0];
     displayMagazineText.value = null;
+    openBox.value = true;
 }
 
 const showMagazine = () => {
