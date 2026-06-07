@@ -30,16 +30,14 @@ export default {
         basementText: String,
         nextLine: Function,
         backgroundImage: String,
-        inventory: Array
+        inventory: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {
-            showInventory: false,
-
-            inventory: [
-/*                 { name: "item 1", quantity: 1 },
-                { name: "item 2", quantity: 5 } */
-            ]
+            showInventory: false
         }
     },
     methods: {
