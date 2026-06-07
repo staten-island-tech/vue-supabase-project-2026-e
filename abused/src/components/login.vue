@@ -10,28 +10,22 @@
 
 
 <script setup>
-import { supabase } from '@/supabase.js'
-import { ref } from 'vue'
 
-const loggedIn = ref(false)
+import { supabase } from '@/supabase.js'
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
 
 async function signIn(){
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
+    options:{
+      redirectTo: `${window.location.origin}/redirect`
+    }
   })
   if(error) {
     console.error('OAuth error:', error)
   } 
-
-  const { data: { user }, er }  = await supabase.auth.getUser()
-  const {info, err} = await supabase.from('users').select('*').eq('email', user.email).maybeSingle()
-  if(!info||err){
-    const { error } = await supabase.from('users').insert({ email: user.email, stage:'intro' })
-    redirect('/intro')
-  } else{
-    const {dat, error} = await supabase.from('users').select('stage').eq('email', user.email)
-    redirect(`/${dat.stage}`)
-  }
 }
 
 

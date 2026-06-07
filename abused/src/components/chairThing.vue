@@ -1,13 +1,15 @@
 <template>
-    <div id="chair" class="waking-up" v-if="props.doneCutscene"></div>
+    <div id="chair" class="waking-up" v-if="!props.free"></div>
     <div id="chair" class="out-of-chair" v-if="props.free"></div>
 </template>
 
 <script setup>
 
 const props = defineProps({
-    free: Boolean,
-    doneCutscene: Boolean
+    free: {
+        type: Boolean,
+        required: true
+    }
 })
 
 </script>
