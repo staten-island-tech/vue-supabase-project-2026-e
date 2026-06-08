@@ -5,14 +5,8 @@
             :nextLine="nextLine"
         />
         <ChairThing
-            :free="free"
-            :doneCutscene="doneCutscene"
+            
         />
-        <div v-if="doneCutscene" class="next-link">
-            <button>
-                <router-link to="/bedroom">Next</router-link>
-            </button>
-        </div>
     </div>
 </template>
 
@@ -22,7 +16,6 @@ import Gameroom from '@/components/gameroom.vue';
 import ChairThing from '@/components/chairThing.vue';
 
 const free = ref(false);
-const doneCutscene = ref(false);
 
 const storyLines = [
     "???: GO TO YOUR ROOM YOU BASTARD",
@@ -41,10 +34,20 @@ const nextLine = () => {
         currentLine.value++
     }
     if (storyLines[currentLine.value] === ""){
-        doneCutscene.value = true;
+        
     }
 }
 
+async function next() {
+    const { data: { user }, error: autherror } = await supabase.auth.getUser();
+    const {data: userP, error: err} = await supabase
+        .from('progress')
+        .update({stage: ''})
+        .select('*')
+        .eq('id', user.id)
+        .single()
+    router.push(`/${userP.stage}`)
+}
 </script>
 
 <style scoped>
