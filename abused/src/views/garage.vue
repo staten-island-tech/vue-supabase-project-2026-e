@@ -10,9 +10,6 @@
         <childWalker/>    
         <img class="toolbox" @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
         <img class="magazine" @click="showMagazine" src="@/assets/box.png" alt="magazine">
-        <div v-if="openBox">
-            
-        </div>
     </div>
 </template>
 
@@ -28,11 +25,23 @@ const displayMagazineText = ref("");
 const openBox = ref(false);
 const inventory = ref([]);
 
-watch(openBox, (newVal) => {
-    if (newVal && !inventory.value(item => item.name === "screw driver")) {
-        inventory.value.push({ name: "screw driver", quantity: 1 });
+const showToolbox = () => {
+    displayToolboxText.value = toolboxLines[0];
+    displayMagazineText.value = null;
+    openBox.value = true;
+
+    const hasScrewdriver = inventory.value.some(
+        item => item.name === "screw driver"
+    );
+
+    if (!hasScrewdriver) {
+        inventory.value.push({
+            name: "screw driver",
+            quantity: 1
+        });
+        console.log(inventory.value);
     }
-});
+}
 
 
 const nextLine = () => {
@@ -49,11 +58,6 @@ const magazineLines = [
     "Oops...That's something for older me to look at."
 ];
 
-const showToolbox = () => {
-    displayToolboxText.value = toolboxLines[0];
-    displayMagazineText.value = null;
-    openBox.value = true;
-}
 
 const showMagazine = () => {
     displayMagazineText.value = magazineLines[0];
