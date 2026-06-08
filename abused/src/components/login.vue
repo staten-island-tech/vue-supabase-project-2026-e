@@ -12,9 +12,6 @@
 <script setup>
 
 import { supabase } from '@/supabase.js'
-import { useRoute } from 'vue-router';
-
-const route = useRoute()
 
 async function signIn(){
   const { error } = await supabase.auth.signInWithOAuth({
