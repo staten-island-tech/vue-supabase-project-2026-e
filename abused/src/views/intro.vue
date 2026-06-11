@@ -4,28 +4,21 @@
             :storyText="storyLines[currentLine]"
             :nextLine="nextLine"
         />
-        <ChairThing
-            :free="free"
-        />
     </div>
 </template>
 
 <script setup>
 import {ref} from 'vue';
 import Gameroom from '@/components/gameroom.vue';
-import ChairThing from '@/components/chairThing.vue';
 import { useRouter } from 'vue-router';
 import { supabase } from '@/supabase';
 
-const free = ref(false);
 
 const storyLines = [
     "???: GO TO YOUR ROOM YOU BASTARD",
     "???: AND STOP BEING A WASTE OF SPACE",
     "???: GO DO SOMETHING USEFUL IN YOUR LIFE",
     "insert sound effects (locking child to chair + slamming door + MC opening eyes slowly)",
-    "Mc: Ughhhh, so close to escaping that time",
-    "Mc: Great. Now I'm back to square one.",
     ""
 ];
 
@@ -44,7 +37,7 @@ async function next() {
     const { data: { user }, error: autherror } = await supabase.auth.getUser();
     const {data: userP, error: err} = await supabase
         .from('progress')
-        .update({stage: 'bedroom'})
+        .update({'stage': 'bedroom'})
         .select('*')
         .eq('id', user.id)
         .single()
@@ -53,21 +46,5 @@ async function next() {
 </script>
 
 <style scoped>
-.next-link {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    width: 200px;
-    height: 60px;
-    background-color: #0f0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 </style>

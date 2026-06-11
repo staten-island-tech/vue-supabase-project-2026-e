@@ -4,8 +4,8 @@
             :backgroundImage="garageBg"
             :toolboxText="displayToolboxText"
             :magazineText="displayMagazineText"
-            :nextLine="nextLine"
             :inventory="inventory"
+            :useItem="useItem"
         />
         <childWalker/>    
         <img class="toolbox" @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
@@ -19,7 +19,6 @@ import childWalker from '@/components/childWalker.vue';
 import garageBg from '@/assets/garagebg.png'
 import {ref} from 'vue';
 
-const currentLine = ref(0);
 const displayToolboxText = ref("");
 const displayMagazineText = ref("");
 const openBox = ref(false);
@@ -36,18 +35,25 @@ const showToolbox = () => {
 
     if (!hasScrewdriver) {
         inventory.value.push({
-            name: "screw driver",
-            quantity: 1
+            name: "screw driver"
         });
         console.log(inventory.value);
     }
 }
 
-
-const nextLine = () => {
-    if (currentLine.value < storyLines.length - 1) {
-        currentLine.value++
-    }
+const useItem = () => {
+    toFinish()
+}
+const router = useRouter();
+async function toFinish() {
+    const { data: { user }, error: autherror } = await supabase.auth.getUser();
+    const {data: userP, error: err} = await supabase
+        .from('progress')
+        .update({'stage': 'finished'})
+        .select('*')
+        .eq('id', user.id)
+        .single()
+    router.push(`/${userP.stage}`)
 }
 
 const toolboxLines = [

@@ -15,6 +15,7 @@
                 <ul>
                     <li v-for="(item, index) in inventory" :key="index">
                         {{ item.name }}
+                        <button @click="useItem">Use item</button>
                     </li>
                 </ul>
                 <button @click="toggleInventory">Close</button>
@@ -30,6 +31,7 @@ export default {
         basementText: String,
         nextLine: Function,
         backgroundImage: String,
+        useItem: Function,
         inventory: {
             type: Array,
             default: () => []
@@ -68,7 +70,7 @@ export default {
 .story {
     width: 75%;
     height: 20%;
-    background-color: burlywood;
+    background-color: #BDBBB0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,7 +80,7 @@ export default {
 .toggleInventory {
     width: 25%;
     height: 20%;
-    background-color: blue;
+    background-color: #8A897C;
     color: white;
     display: grid;
     place-items: center;
@@ -87,7 +89,7 @@ export default {
     right:0;
 }
 .inventoryPopup {
-    background-color: brown;
+    background-color: #D2D7DF;
     position: fixed;
     height: 75%;
     width: 100%;

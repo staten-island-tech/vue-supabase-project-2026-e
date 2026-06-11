@@ -5,14 +5,15 @@
             :basementText="basementLine[currentLine]"
             :nextLine="nextLine"
         />
-        <ChildWalker class="child-walker"/>
+
         <img 
             class="door" 
             :class="{ 'door-open': doorOpen }"
             @click="openDoor" 
             src="@/assets/door.png"
             alt="door"
-        >
+        >        
+        <ChildWalker class="child-walker"/>
         <div v-if="open" class="keypad-overlay">
             <div class="keypad-container">
                 <h2>Enter Code</h2>
@@ -35,9 +36,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="finishedBase">
 
-        </div>
     </div>
 </template>
 
@@ -78,7 +77,7 @@ async function toGarage() {
     const { data: { user }, error: autherror } = await supabase.auth.getUser();
     const {data: userP, error: err} = await supabase
         .from('progress')
-        .update({stage: 'garage'})
+        .update({'stage': 'garage'})
         .select('*')
         .eq('id', user.id)
         .single()

@@ -1,4 +1,4 @@
-import Gameroom from '@/components/gameroom.vue'
+
 import Abedroom from '@/views/abedroom.vue'
 import Basement from '@/views/basement.vue'
 import Garage from '@/views/garage.vue'
@@ -40,7 +40,7 @@ const router = createRouter({
       path: '/redirect',
       name: 'redirect',
       component: Redirect
-    }
+    },
   ],
 })
 
