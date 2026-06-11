@@ -19,29 +19,36 @@ const storyLines = [
     "???: AND STOP BEING A WASTE OF SPACE",
     "???: GO DO SOMETHING USEFUL IN YOUR LIFE",
     "insert sound effects (locking child to chair + slamming door + MC opening eyes slowly)",
-    ""
 ];
 
 const currentLine = ref(0);
-
+const isTransitioning = ref(false);
 const nextLine = () => {
+    if (isTransitioning.value) {
+        return;
+    }
     if (currentLine.value < storyLines.length - 1) {
         currentLine.value++
-    }
-    if (storyLines[currentLine.value] === ""){
+    } else {
+        isTransitioning.value = true;
         next();
     }
 }
 const router = useRouter();
 async function next() {
     const { data: { user }, error: autherror } = await supabase.auth.getUser();
-    const {data: userP, error: err} = await supabase
+    if (autherror || !user) {
+        console.error("Auth error:", autherror);
+        router.push('/bedroom');
+        return;
+    }
+    const { data: userP, error: err } = await supabase
         .from('progress')
-        .update({'stage': 'bedroom'})
-        .select('*')
+        .update({ 'stage': 'bedroom' })
         .eq('id', user.id)
-        .single()
-    router.push(`/${userP.stage}`)
+        .select('*')
+        .single();
+        router.push(`/${userP.stage || 'bedroom'}`);
 }
 </script>
 

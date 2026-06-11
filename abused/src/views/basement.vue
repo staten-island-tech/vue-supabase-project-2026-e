@@ -44,6 +44,7 @@
 import ChildWalker from '@/components/childWalker.vue';
 import Gameroom from '@/components/gameroom.vue';
 import basementBg from '@/assets/basementbg.png';
+import { supabase } from '@/supabase';
 import {ref, computed, onMounted} from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -67,7 +68,6 @@ const openDoor = () => {
     if (!doorOpen.value) {
         open.value = true;
         keypadInput.value = '';
-        toGarage();
     }
 }
 
@@ -75,13 +75,18 @@ const router = useRouter();
 
 async function toGarage() {
     const { data: { user }, error: autherror } = await supabase.auth.getUser();
-    const {data: userP, error: err} = await supabase
+    if (autherror || !user) {
+        console.error("Auth error:", autherror);
+        router.push('/garage');
+        return;
+    }
+    const { data: userP, error: err } = await supabase
         .from('progress')
-        .update({'stage': 'garage'})
-        .select('*')
+        .update({ 'stage': 'garage' })
         .eq('id', user.id)
-        .single()
-    router.push(`/${userP.stage}`)
+        .select('*')
+        .single();
+        router.push(`/${userP.stage || 'garage'}`);
 }
 
 const closeDoor = () => {
@@ -99,11 +104,12 @@ const clearInput = () => {
     keypadInput.value = '';
 }
 
-const submitCode = () => {
+const submitCode = async() => {
     if (keypadInput.value === correctCode) {
         doorOpen.value = true;
         finishedBase.value = true;
         closeDoor();
+        await toGarage();
     } else {
         alert('Incorrect code. Try again.');
         keypadInput.value = '';

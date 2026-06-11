@@ -5,6 +5,7 @@ import Garage from '@/views/garage.vue'
 import Intro from '@/views/intro.vue'
 import Menu from '@/views/menu.vue'
 import Redirect from '@/views/redirect.vue'
+// import Finished from '@/views/finished.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 
@@ -41,6 +42,11 @@ const router = createRouter({
       name: 'redirect',
       component: Redirect
     },
+/*     {
+      path: '/finished',
+      name: 'finished',
+      component: Finished
+    } */
   ],
 })
 

@@ -46,14 +46,19 @@ const useItem = () => {
 }
 const router = useRouter();
 async function toFinish() {
-    const { data: { user }, error: autherror } = await supabase.auth.getUser();
-    const {data: userP, error: err} = await supabase
+const { data: { user }, error: autherror } = await supabase.auth.getUser();
+    if (autherror || !user) {
+        console.error("Auth error:", autherror);
+        router.push('/garage');
+        return;
+    }
+    const { data: userP, error: err } = await supabase
         .from('progress')
-        .update({'stage': 'finished'})
-        .select('*')
+        .update({ 'stage': 'garage' })
         .eq('id', user.id)
-        .single()
-    router.push(`/${userP.stage}`)
+        .select('*')
+        .single();
+        router.push(`/${userP.stage || 'garage'}`);
 }
 
 const toolboxLines = [
