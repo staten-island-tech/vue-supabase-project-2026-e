@@ -5,7 +5,7 @@
             :nextLine="nextLine"
         />
         <ChairThing
-            
+            :free="free"
         />
     </div>
 </template>
@@ -14,6 +14,8 @@
 import {ref} from 'vue';
 import Gameroom from '@/components/gameroom.vue';
 import ChairThing from '@/components/chairThing.vue';
+import { useRouter } from 'vue-router';
+import { supabase } from '@/supabase';
 
 const free = ref(false);
 
@@ -34,15 +36,15 @@ const nextLine = () => {
         currentLine.value++
     }
     if (storyLines[currentLine.value] === ""){
-        
+        next();
     }
 }
-
+const router = useRouter();
 async function next() {
     const { data: { user }, error: autherror } = await supabase.auth.getUser();
     const {data: userP, error: err} = await supabase
         .from('progress')
-        .update({stage: ''})
+        .update({stage: 'bedroom'})
         .select('*')
         .eq('id', user.id)
         .single()

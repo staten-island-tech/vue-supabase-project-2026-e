@@ -36,9 +36,7 @@
             </div>
         </div>
         <div v-if="finishedBase">
-            <button class="link">
-                <router-link to="/garage">Next Room</router-link>
-            </button>
+
         </div>
     </div>
 </template>
@@ -69,7 +67,20 @@ const openDoor = () => {
     if (!doorOpen.value) {
         open.value = true;
         keypadInput.value = '';
+        toGarage();
     }
+}
+
+const router = useRouter();
+async function toGarage() {
+    const { data: { user }, error: autherror } = await supabase.auth.getUser();
+    const {data: userP, error: err} = await supabase
+        .from('progress')
+        .update({stage: 'garage'})
+        .select('*')
+        .eq('id', user.id)
+        .single()
+    router.push(`/${userP.stage}`)
 }
 
 const closeDoor = () => {
