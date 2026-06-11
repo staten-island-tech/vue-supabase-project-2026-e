@@ -17,7 +17,7 @@
 import Gameroom from '@/components/gameroom.vue';
 import childWalker from '@/components/childWalker.vue';
 import garageBg from '@/assets/garagebg.png'
-import {ref, computed, watch} from 'vue';
+import {ref} from 'vue';
 
 const currentLine = ref(0);
 const displayToolboxText = ref("");
