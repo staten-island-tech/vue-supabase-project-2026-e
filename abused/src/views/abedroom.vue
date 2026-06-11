@@ -30,8 +30,8 @@ const inventory = ref([])
 
 
 function chairUnlock(){
-    if(inventory.value.includes('bobbyPins')){
-
+    if(inventory.value.some(i => i.name==='bobbyPins')){
+        
     }else{
 
     }
