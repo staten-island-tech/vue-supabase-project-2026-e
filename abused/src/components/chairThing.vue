@@ -17,13 +17,13 @@ const props = defineProps({
 <style scoped>
 #chair{
     background-image: url(@/assets/childWakeup.png);
-    background-position: 0px;
+    background-position: 0%;
     background-size: cover;
     position: absolute;
-    top:400px;
-    left:20px;
-    height: 400px;
-    width: 250px;
+    top:54%;
+    left:20%;
+    height: 16%;
+    width: 10%;
 }
 
 .waking-up{
@@ -36,7 +36,7 @@ const props = defineProps({
 }
 
 @keyframes woketh {
-    from{background-position: 0px;}
-    to{background-position: 3600px;}
+    from{background-position: 0%;}
+    to{background-position: 90%;}
 }
 </style>
