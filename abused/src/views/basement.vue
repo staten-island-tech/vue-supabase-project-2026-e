@@ -46,6 +46,7 @@ import ChildWalker from '@/components/childWalker.vue';
 import Gameroom from '@/components/gameroom.vue';
 import basementBg from '@/assets/basementbg.png';
 import {ref, computed, onMounted} from 'vue';
+import { useRouter } from 'vue-router';
 
 const basement = ref(false);
 const currentLine = ref(0)
@@ -72,6 +73,7 @@ const openDoor = () => {
 }
 
 const router = useRouter();
+
 async function toGarage() {
     const { data: { user }, error: autherror } = await supabase.auth.getUser();
     const {data: userP, error: err} = await supabase
