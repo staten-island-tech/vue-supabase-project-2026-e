@@ -38,9 +38,11 @@ const walkTo = (event) =>{
 
 <style scoped>
 .space{
-    position:absolute;
-    width:100vw;
-    height: 70vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
     cursor: crosshair;
     overflow: hidden;
 }
@@ -49,9 +51,9 @@ const walkTo = (event) =>{
     background-image: url(@/assets/childWalk.png);
     background-size: cover;
     position: absolute;
-    height: 320px;
-    width: 200px;
-    top: 200px;
+    top:40%;
+    height: 32%;
+    width: 20%;
 }
 
 .stand-tl{
@@ -77,16 +79,16 @@ const walkTo = (event) =>{
 }
 
 @keyframes walk {
-    from {background-position: 0px;}
-    to {background-position: 800px;}
+    from {background-position: 0%;}
+    to {background-position: 40%;}
 }
 @keyframes drawer {
-    from{background-position: 0px;}
-    to {background-image: 1200px;}
+    from{background-position: 0%;}
+    to {background-image: 60%;}
 }
 @keyframes shock {
-    from{background-position: 0px;}
-    to{background-position: 1600px;}
+    from{background-position: 0%;}
+    to{background-position: 80%;}
 }
 @keyframes look-left{
     from{transform: scaleX(1);}

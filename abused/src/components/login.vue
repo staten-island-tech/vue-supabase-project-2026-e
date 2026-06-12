@@ -40,11 +40,11 @@ async function signIn(){
   color: #0f1923;
   cursor: pointer;
   position: relative;
-  padding: 8px;
-  margin-bottom: 20px;
+  padding: 1%;
+  margin-bottom: 10%;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 230%;
   transition: all .15s ease;
 }
 
@@ -55,7 +55,7 @@ async function signIn(){
   position: absolute;
   right: 0;
   left: 0;
-  height: calc(50% - 5px);
+  height: calc(50%);
   border: 1px solid #7D8082;
   transition: all .15s ease;
 }
