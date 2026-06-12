@@ -1,5 +1,6 @@
 <template>
     <div class="title">Escape The House</div>
+    <div class="t"> Written by Stella Chan</div>
     <Suspense>
         <Login class="start-button"/>
     </Suspense>
@@ -17,6 +18,11 @@ import Login from '@/components/login.vue';
     padding-left: 5%;
     padding-top: 10%;
     font-family: 'Courier New', Courier, monospace;
+}
+.t{
+    font-family: 'Courier New', Courier, monospace;
+    padding-left: 5%;
+    font-size: 300%;
 }
 .start-button{
     position: absolute;

@@ -22,8 +22,8 @@ div{
     position: absolute;
     top:40%;
     left:25%;
-    height: 32%;
-    width: 10%;
+    height: 320px;
+    width: 200px;
 }
 
 #interactable:hover{
@@ -41,6 +41,6 @@ div{
 
 @keyframes woketh {
     from{background-position: 0;}
-    to{background-position: 180%;}
+    to{background-position: 1800px;}
 }
 </style>

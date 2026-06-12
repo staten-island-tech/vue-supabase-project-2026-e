@@ -51,9 +51,9 @@ const walkTo = (event) =>{
     background-image: url(@/assets/childWalk.png);
     background-size: cover;
     position: absolute;
-    top:40%;
-    height: 32%;
-    width: 20%;
+    top:45%;
+    height: 320px;
+    width: 200px;
 }
 
 .stand-tl{
@@ -79,16 +79,16 @@ const walkTo = (event) =>{
 }
 
 @keyframes walk {
-    from {background-position: 0%;}
-    to {background-position: 40%;}
+    from {background-position: 0px;}
+    to {background-position: 800px;}
 }
 @keyframes drawer {
-    from{background-position: 0%;}
-    to {background-image: 60%;}
+    from{background-position: 0px;}
+    to {background-image: 1200px;}
 }
 @keyframes shock {
-    from{background-position: 0%;}
-    to{background-position: 80%;}
+    from{background-position: 0px;}
+    to{background-position: 1600px;}
 }
 @keyframes look-left{
     from{transform: scaleX(1);}

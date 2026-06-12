@@ -6,7 +6,7 @@
             :nextLine="nextLine"
             :inventory="inventory"
         />
-        <img :src="door" class="door" v-if="!free">
+        <img :src="door" class="door" @click="unlatch" v-if="!free">
         <img :src="door" class="door" @click="lockpick" v-if="!lockpicked, free" id="interactable">
         <img :src="door" class="door" @click="unlatch" v-if="lockpicked" id="interactable">
         <img :src="desk" class="desk" @click="lookDrawer" id="interactable">
@@ -35,6 +35,7 @@ import desk  from '@/assets/desk.png'
 import { onMounted, ref } from 'vue';
 import Transition from '@/components/transition.vue';
 import { useRouter } from 'vue-router';
+import { supabase } from '@/supabase';
 
 const free = ref(false)
 const lockpicked = ref(false)
@@ -42,6 +43,7 @@ const drawerOpen = ref(false)
 const hasBobbyPin = ref(false)
 const hasRuler = ref(false)
 
+const router = useRouter()
 const loaded = ref(false)
 const inventory = ref([])
 const currentLine = ref(0)
@@ -93,13 +95,8 @@ function lockpick(){
 async function unlatch(){
     if(inventory.value.some(i => i.name ==='Ruler')){
         const { data: { user }, error: autherror } = await supabase.auth.getUser();
-        const { data, error } = await supabase
-            .from('progress')
-            .update({ 'stage': 'basement' })
-            .eq('id', user.id)
-            .select('*')
-        const router = useRouter()
-        router.push(data)
+        const { data, error } = await supabase.from('progress').update({ 'stage': 'basement' }).eq('id', user.id)
+        router.push(`/basement`);
     }else{
         alert("I need something to unlatch this with...")
     }
