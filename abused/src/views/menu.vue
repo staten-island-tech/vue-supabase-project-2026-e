@@ -13,14 +13,14 @@ import Login from '@/components/login.vue';
 
 <style scoped>
 .title{
-    font-size: 800%;
+    font-size: 600%;
     padding-left: 5%;
     padding-top: 10%;
     font-family: 'Courier New', Courier, monospace;
 }
 .start-button{
     position: absolute;
-    top:50%;
+    top:60%;
     left: 10%;
 }
 </style>

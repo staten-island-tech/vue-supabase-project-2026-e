@@ -1,6 +1,6 @@
 <template>
-    <div id="chair" class="waking-up" v-if="!props.free"></div>
-    <div id="chair" class="out-of-chair" v-if="props.free"></div>
+    <div id="interactable" class="waking-up" v-if="!props.free"></div>
+    <div class="out-of-chair" v-if="props.free"></div>
 </template>
 
 <script setup>
@@ -15,15 +15,19 @@ const props = defineProps({
 </script>
 
 <style scoped>
-#chair{
+div{
     background-image: url(@/assets/childWakeup.png);
     background-position: 0%;
     background-size: cover;
     position: absolute;
-    top:54%;
-    left:20%;
-    height: 16%;
+    top:40%;
+    left:30%;
+    height: 32%;
     width: 10%;
+}
+
+#interactable:hover{
+    background-color: #ffffff44;
 }
 
 .waking-up{
@@ -36,7 +40,9 @@ const props = defineProps({
 }
 
 @keyframes woketh {
-    from{background-position: 0%;}
-    to{background-position: 90%;}
+    from{background-position: 0%;
+        width: 20%;}
+    to{background-position: 180%;
+        width: 20%;}
 }
 </style>

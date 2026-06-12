@@ -2,19 +2,21 @@
     <div class="container">
         <Gameroom
             :backgroundImage="bedroombg"
-            :basementText="startLines[currentLine]"
+            :storyText="startLines[currentLine]"
             :nextLine="nextLine"
             :inventory="inventory"
         />
-        <img :src="bed" class="bed">
         <img :src="door" class="door" v-if="!free">
-        <img :src="door" class="door" @click="lockpick" v-if="!lockpicked, free">
-        <img :src="door" class="door" @click="unlatch" v-if="lockpicked">
-        <img :src="desk" class="desk" @click="lookDrawer">
-        <ChairThing :free="free" @click="chairUnlock"/>
+        <img :src="door" class="door" @click="lockpick" v-if="!lockpicked, free" id="interactable">
+        <img :src="door" class="door" @click="unlatch" v-if="lockpicked" id="interactable">
+        <img :src="desk" class="desk" @click="lookDrawer" id="interactable">
+        <img :src="ruler" class ="ruler" @click="accquireRuler" id="interactable">
+        <ChairThing class="chair" :free="free" @click="chairUnlock"/>
+        <img :src="bed" class="bed">
         <ChildWalker v-if="free"/>
-        <div v-if="drawerOpen">
-
+        <div class="drawer" v-if="drawerOpen">
+            <div class="closeth" @click="closeDrawer">Close Drawer</div>
+            <img :src="bobbyPin" class="bobbyPins" @click="accquireBobbypins"id="interactable">
         </div>
     </div>
     <Transition v-if="loaded"/>
@@ -27,7 +29,10 @@ import Gameroom from '@/components/gameroom.vue';
 import bedroombg from '@/assets/bedroombg.png';
 import bed from '@/assets/bed.png';
 import door from '@/assets/door.png';
-import { ref } from 'vue';
+import ruler from '@/assets/ruler.png';
+import bobbyPin from '@/assets/bobbypin.png'
+import desk  from '@/assets/desk.png'
+import { onMounted, ref } from 'vue';
 import Transition from '@/components/transition.vue';
 import { useRouter } from 'vue-router';
 
@@ -35,6 +40,7 @@ const free = ref(false)
 const lockpicked = ref(false)
 const drawerOpen = ref(false)
 
+const loaded = ref(false)
 const inventory = ref([])
 const currentLine = ref(0)
 const startLines = [
@@ -48,16 +54,24 @@ const nextLine = () => {
     }
 }
 
+function lookDrawer(){
+    drawerOpen.value = true
+}
+
+function closeDrawer(){
+    drawerOpen.value = false
+}
+
 function accquireBobbypins(){
-    
+    inventory.value.push({name: "Bobby Pin"});
 }
 
 function accquireRuler(){
-    
+    inventory.value.push({name: "Ruler"});
 }
 
 function chairUnlock(){
-    if(inventory.value.some(i => i.name ==='bobbyPins')){
+    if(inventory.value.some(i => i.name ==='Bobby Pin')){
         free.value = true
     }else{
         alert("I need something to unlock this with...")
@@ -65,7 +79,7 @@ function chairUnlock(){
 }
 
 function lockpick(){
-    if(inventory.value.some(i => i.name ==='bobbyPins')){
+    if(inventory.value.some(i => i.name ==='Bobby Pin')){
         lockpicked.value = true
     }else{
         alert("You're not supposed to be here")
@@ -73,7 +87,7 @@ function lockpick(){
 }
 
 async function unlatch(){
-    if(inventory.value.some(i => i.name ==='ruler')){
+    if(inventory.value.some(i => i.name ==='Ruler')){
         const { data: { user }, error: autherror } = await supabase.auth.getUser();
         const { data, error } = await supabase
             .from('progress')
@@ -87,21 +101,73 @@ async function unlatch(){
     }
 }
 
+onMounted(()=>{
+    loaded.value = true
+})
+
 </script>
 
 <style scoped>
+*{
+    font-family: 'Courier New', Courier, monospace;
+}
 .container{
     width: 100%;
     height: 100%;
 }
 .bed{
-    height: 30%;
-    top: 60%;
-    left: 15%;
+    position: absolute;
+    height: 15%;
+    top: 65%;
+    left: 21%;
+    scale: 80% 100%
 }
 .desk{
+    position: absolute;
+    height: 30%;
+    top: 43%;
+    left: 30%;
+}
+.chair{
+    position: absolute;
     height: 30%;
     top: 60%;
     left: 30%;
+}
+.door{
+    position: absolute;
+    height: 40%;
+    top: 26%;
+    left: 55%;
+}
+.ruler{
+    position: absolute;
+    height: 10%;
+    top: 49%;
+    left: 38%;
+    scale: 100% 45%;
+}
+.drawer{
+    position: absolute;
+    height: 40%;
+    width: 50%;
+    top: 20%;
+    left: 25%;
+    background-color: #dd9b69;
+}
+.closeth{
+    position: relative;
+    font-size: 50%;
+    top: 0%;
+    left: 0%;
+    background-color: #960c0c;
+    color: #ffffff;
+    padding: 3%;
+}
+.bobbyPins{
+    height: 40%;
+}
+#interactable:hover{
+    background-color: #ffffff44;
 }
 </style>

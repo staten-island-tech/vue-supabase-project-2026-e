@@ -50,9 +50,9 @@ const walkTo = (event) =>{
     background-image: url(@/assets/childWalk.png);
     background-size: cover;
     position: absolute;
-    height: 16%;
-    width: 10%;
-    top: 54%;
+    top:40%;
+    height: 32%;
+    width: 20%;
 }
 
 .stand-tl{
