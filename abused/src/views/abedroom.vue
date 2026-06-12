@@ -4,7 +4,7 @@
             :backgroundImage="bedroombg"
             :basementText="startLines[currentLine]"
             :nextLine="nextLine"
-            :inventory="store.inventory"
+            :inventory="inventory"
         />
         <ChairThing :free="free" @click="chairUnlock"/>
         <ChildWalker v-if="free"/>
@@ -26,11 +26,9 @@ import door from '@/assets/door.png';
 import { ref } from 'vue';
 import Transition from '@/components/transition.vue';
 import { useRouter } from 'vue-router';
-import { userStore } from '@/stores/userStore';
-import { supabase } from '@/supabase';
 
-const store = userStore();
 const free = ref(false)
+const inventory = ref([])
 const currentLine = ref(0)
 const startLines = [
     "Ughhhh, so close to escaping that time", 
@@ -41,7 +39,7 @@ const lockpicked = ref(false)
 
 
 function chairUnlock(){
-    if(store.hasItem('bobbyPins')){
+    if(inventory.value.includes('bobbyPins')){
         free.value = true
     }else{
         alert("I need something to unlock this with...")
@@ -49,7 +47,7 @@ function chairUnlock(){
 }
 
 function lockpick(){
-    if(store.hasItem('bobbyPins')){
+    if(inventory.value.includes('bobbyPins')){
         lockpicked.value = true
     }else{
         alert("You're not supposed to be here")
@@ -57,7 +55,7 @@ function lockpick(){
 }
 
 async function unlatch(){
-    if(store.hasItem('ruler')){
+    if(inventory.value.includes('ruler')){
         const { data: { user }, error: autherror } = await supabase.auth.getUser();
         const { data, error } = await supabase
             .from('progress')
