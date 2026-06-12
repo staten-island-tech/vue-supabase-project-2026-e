@@ -18,11 +18,14 @@ import Gameroom from '@/components/gameroom.vue';
 import childWalker from '@/components/childWalker.vue';
 import garageBg from '@/assets/garagebg.png'
 import {ref} from 'vue';
+import { useRouter } from 'vue-router';
+import { supabase } from '@/supabase';
 
 const displayToolboxText = ref("");
 const displayMagazineText = ref("");
 const openBox = ref(false);
 const inventory = ref([]);
+const router = useRouter();
 
 const showToolbox = () => {
     displayToolboxText.value = toolboxLines[0];
@@ -44,21 +47,20 @@ const showToolbox = () => {
 const useItem = () => {
     toFinish()
 }
-const router = useRouter();
 async function toFinish() {
 const { data: { user }, error: autherror } = await supabase.auth.getUser();
     if (autherror || !user) {
         console.error("Auth error:", autherror);
-        router.push('/garage');
+        router.push('/finished');
         return;
     }
     const { data: userP, error: err } = await supabase
         .from('progress')
-        .update({ 'stage': 'garage' })
+        .update({ 'stage': 'finished' })
         .eq('id', user.id)
         .select('*')
         .single();
-        router.push(`/${userP.stage || 'garage'}`);
+        router.push(`/${userP.stage || 'finished'}`);
 }
 
 const toolboxLines = [
