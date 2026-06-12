@@ -51,6 +51,7 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
 .gameScreen {
     position: absolute;
@@ -76,6 +77,7 @@ export default {
     align-items: center;
     position: absolute;
     bottom: 0;
+    font-family: 'Cinzel', serif;
 }
 .toggleInventory {
     width: 25%;
@@ -87,13 +89,16 @@ export default {
     position: absolute;
     bottom: 0;
     right:0;
+    font-family: 'Cinzel', serif;
 }
 .inventoryPopup {
     background-color: #D2D7DF;
     position: fixed;
-    height: 75%;
+    height: 100%;
     width: 100%;
     top: 0;
     left: 0;
+    z-index: 1000;
+    font-family: 'Cinzel', serif;
 }
 </style>

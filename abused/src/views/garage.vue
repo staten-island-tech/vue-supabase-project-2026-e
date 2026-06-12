@@ -4,7 +4,7 @@
             :backgroundImage="garageBg"
             :toolboxText="displayToolboxText"
             :magazineText="displayMagazineText"
-            :inventory="inventory"
+            :inventory="store.inventory"
             :useItem="useItem"
         />
         <childWalker/>    
@@ -20,11 +20,12 @@ import garageBg from '@/assets/garagebg.png'
 import {ref} from 'vue';
 import { useRouter } from 'vue-router';
 import { supabase } from '@/supabase';
+import { userStore } from '@/stores/userStore';
 
+const store = userStore();
 const displayToolboxText = ref("");
 const displayMagazineText = ref("");
 const openBox = ref(false);
-const inventory = ref([]);
 const router = useRouter();
 
 const showToolbox = () => {
@@ -32,15 +33,11 @@ const showToolbox = () => {
     displayMagazineText.value = null;
     openBox.value = true;
 
-    const hasScrewdriver = inventory.value.some(
-        item => item.name === "screw driver"
-    );
-
-    if (!hasScrewdriver) {
-        inventory.value.push({
+    if (!store.hasItem("screw driver")) {
+        store.addItem({
             name: "screw driver"
         });
-        console.log(inventory.value);
+        console.log(store.inventory);
     }
 }
 

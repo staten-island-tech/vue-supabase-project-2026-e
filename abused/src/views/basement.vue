@@ -4,6 +4,7 @@
             :backgroundImage="basementBg" 
             :basementText="basementLine[currentLine]"
             :nextLine="nextLine"
+            :inventory="store.inventory"
         />
 
         <img 
@@ -47,7 +48,9 @@ import basementBg from '@/assets/basementbg.png';
 import { supabase } from '@/supabase';
 import {ref, computed, onMounted} from 'vue';
 import { useRouter } from 'vue-router';
+import { userStore } from '@/stores/userStore';
 
+const store = userStore();
 const basement = ref(false);
 const currentLine = ref(0)
 const basementLine = [
