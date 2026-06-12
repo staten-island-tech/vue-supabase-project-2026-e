@@ -10,13 +10,13 @@
         <img :src="door" class="door" @click="lockpick" v-if="!lockpicked, free" id="interactable">
         <img :src="door" class="door" @click="unlatch" v-if="lockpicked" id="interactable">
         <img :src="desk" class="desk" @click="lookDrawer" id="interactable">
-        <img :src="ruler" class ="ruler" @click="accquireRuler" id="interactable">
+        <img :src="ruler" class ="ruler" @click="accquireRuler" id="interactable" v-if="!hasRuler">
         <ChairThing class="chair" :free="free" @click="chairUnlock"/>
         <img :src="bed" class="bed">
         <ChildWalker v-if="free"/>
         <div class="drawer" v-if="drawerOpen">
             <div class="closeth" @click="closeDrawer">Close Drawer</div>
-            <img :src="bobbyPin" class="bobbyPins" @click="accquireBobbypins"id="interactable">
+            <img :src="bobbyPin" class="bobbyPins" @click="accquireBobbypins"id="interactable" v-if="!hasBobbyPin">
         </div>
     </div>
     <Transition v-if="loaded"/>
@@ -39,6 +39,8 @@ import { useRouter } from 'vue-router';
 const free = ref(false)
 const lockpicked = ref(false)
 const drawerOpen = ref(false)
+const hasBobbyPin = ref(false)
+const hasRuler = ref(false)
 
 const loaded = ref(false)
 const inventory = ref([])
@@ -64,10 +66,12 @@ function closeDrawer(){
 
 function accquireBobbypins(){
     inventory.value.push({name: "Bobby Pin"});
+    hasBobbyPin.value = true
 }
 
 function accquireRuler(){
     inventory.value.push({name: "Ruler"});
+    hasRuler.value = true
 }
 
 function chairUnlock(){
@@ -119,19 +123,13 @@ onMounted(()=>{
     position: absolute;
     height: 15%;
     top: 65%;
-    left: 21%;
-    scale: 80% 100%
+    left: 25%;
+    scale: 80% 100%;
 }
 .desk{
     position: absolute;
     height: 30%;
     top: 43%;
-    left: 30%;
-}
-.chair{
-    position: absolute;
-    height: 30%;
-    top: 60%;
     left: 30%;
 }
 .door{
@@ -157,7 +155,7 @@ onMounted(()=>{
 }
 .closeth{
     position: relative;
-    font-size: 50%;
+    font-size: 100%;
     top: 0%;
     left: 0%;
     background-color: #960c0c;

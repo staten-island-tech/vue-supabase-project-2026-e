@@ -17,11 +17,11 @@ const props = defineProps({
 <style scoped>
 div{
     background-image: url(@/assets/childWakeup.png);
-    background-position: 0%;
+    background-position: 0;
     background-size: cover;
     position: absolute;
     top:40%;
-    left:30%;
+    left:25%;
     height: 32%;
     width: 10%;
 }
@@ -40,9 +40,7 @@ div{
 }
 
 @keyframes woketh {
-    from{background-position: 0%;
-        width: 20%;}
-    to{background-position: 180%;
-        width: 20%;}
+    from{background-position: 0;}
+    to{background-position: 180%;}
 }
 </style>
