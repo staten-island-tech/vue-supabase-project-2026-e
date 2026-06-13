@@ -131,7 +131,7 @@ const submitCode = async() => {
 .door {
     position: absolute;
     cursor: pointer;
-    left: 5%;
+    left: 15%;
     top: 6%;
     transform: rotate(88deg);
     width: 25vw;
