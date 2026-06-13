@@ -45,19 +45,13 @@ const useItem = () => {
     toFinish()
 }
 async function toFinish() {
-const { data: { user }, error: autherror } = await supabase.auth.getUser();
-    if (autherror || !user) {
-        console.error("Auth error:", autherror);
-        router.push('/finished');
-        return;
-    }
-    const { data: userP, error: err } = await supabase
-        .from('progress')
-        .update({ 'stage': 'finished' })
-        .eq('id', user.id)
-        .select('*')
-        .single();
-        router.push(`/${userP.stage || 'finished'}`);
+        const { data: { user }, error: autherror } = await supabase.auth.getUser();
+        const { error } = await supabase.from('progress')
+            .update({ stage: 'finished' })
+            .eq('id', user.id)
+            .select('*')
+            .single();
+        router.push(`/finished`)
 }
 
 const toolboxLines = [
@@ -83,12 +77,6 @@ const showMagazine = () => {
     width: 100vw;
     height: 100vh;
 }
-.story {
-    margin-top: auto;
-    width: 75%;
-    height: 20%;
-    background-color: burlywood;
-}
 img {
      position: absolute;
      cursor: grab;
@@ -98,16 +86,16 @@ img {
      width: 12vw;
      max-width: 160px;
      height: auto;
-     left: 70%;
-     top: 70%;
+     left: 1008px;
+     top: 490px;
      transform: translate(-50%, -50%);
 }
 .magazine {
      width: 12vw;
      max-width: 160px;
      height: auto;
-     left: 85%;
-     top: 70%;
+     left: 800px;
+     top: 480px;
      transform: translate(-50%, -50%);
 }
 </style>
