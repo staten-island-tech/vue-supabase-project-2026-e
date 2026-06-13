@@ -5,7 +5,6 @@
 import { supabase } from '@/supabase';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-// restructure/ not put as a page??
 
 const router = useRouter()
 

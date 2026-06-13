@@ -101,6 +101,7 @@ async function unlatch(){
             .eq('id', user.id)
             .select('*')
             .single();
+        router.push(`/basement`)
     }else{
         alert("I need something to unlatch this with...")
     }
