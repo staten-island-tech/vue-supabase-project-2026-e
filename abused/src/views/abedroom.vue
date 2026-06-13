@@ -2,16 +2,19 @@
     <div class="container">
         <Gameroom
             :backgroundImage="bedroombg"
-            :storyText="startLines[currentLine]"
+            :storyText="storyLines[currentLine]"
             :nextLine="nextLine"
             :inventory="inventory"
         />
-        <img :src="door" class="door" @click="unlatch" v-if="!free">
-        <img :src="door" class="door" @click="lockpick" v-if="!lockpicked, free" id="interactable">
+        <img :src="door" class="door" v-if="!free">
+        <img :src="door" class="door" @click="lockpick" v-if="!lockpicked && free" id="interactable">
         <img :src="door" class="door" @click="unlatch" v-if="lockpicked" id="interactable">
         <img :src="desk" class="desk" @click="lookDrawer" id="interactable">
         <img :src="ruler" class ="ruler" @click="accquireRuler" id="interactable" v-if="!hasRuler">
-        <ChairThing class="chair" :free="free" @click="chairUnlock"/>
+    
+        <div id="interactable" class="waking-up chair" v-if="!free" @click="chairUnlock"></div>
+        <div class="out-of-chair chair" v-if="free"></div>
+
         <img :src="bed" class="bed">
         <ChildWalker v-if="free"/>
         <div class="drawer" v-if="drawerOpen">
@@ -19,11 +22,9 @@
             <img :src="bobbyPin" class="bobbyPins" @click="accquireBobbypins"id="interactable" v-if="!hasBobbyPin">
         </div>
     </div>
-    <Transition v-if="loaded"/>
 </template>
 
 <script setup>
-import ChairThing from '@/components/chairThing.vue';
 import ChildWalker from '@/components/childWalker.vue';
 import Gameroom from '@/components/gameroom.vue';
 import bedroombg from '@/assets/bedroombg.png';
@@ -33,7 +34,6 @@ import ruler from '@/assets/ruler.png';
 import bobbyPin from '@/assets/bobbypin.png'
 import desk  from '@/assets/desk.png'
 import { onMounted, ref } from 'vue';
-import Transition from '@/components/transition.vue';
 import { useRouter } from 'vue-router';
 import { supabase } from '@/supabase';
 
@@ -47,9 +47,10 @@ const router = useRouter()
 const loaded = ref(false)
 const inventory = ref([])
 const currentLine = ref(0)
-const startLines = [
+const storyLines = [
     "Mc: Ughhhh, so close to escaping that time",
     "Mc: Great. Now I'm back to square one.",
+    ""
 ]
 
 const nextLine = () => {
@@ -95,8 +96,11 @@ function lockpick(){
 async function unlatch(){
     if(inventory.value.some(i => i.name ==='Ruler')){
         const { data: { user }, error: autherror } = await supabase.auth.getUser();
-        const { data, error } = await supabase.from('progress').update({ 'stage': 'basement' }).eq('id', user.id)
-        router.push(`/basement`);
+        const { error } = await supabase.from('progress')
+            .update({ stage: 'basement' })
+            .eq('id', user.id)
+            .select('*')
+            .single();
     }else{
         alert("I need something to unlatch this with...")
     }
@@ -164,5 +168,30 @@ onMounted(()=>{
 }
 #interactable:hover{
     background-color: #ffffff44;
+}
+
+
+.chair{
+    background-position: 0px;
+    background-size: cover;
+    position: absolute;
+    top:40%;
+    left:2%;
+    height: 320px;
+    width: 200px;
+}
+
+.waking-up{
+    background-image: url(@/assets/childWakeup.png);
+    animation: wokeup 3s steps(9) 1 reverse forwards;
+}
+
+.out-of-chair{
+    background-image: url(@/assets/chair.png);
+}
+
+@keyframes wokeup {
+    from{background-position: 0px;}
+    to{background-position: 1800px;}
 }
 </style>
