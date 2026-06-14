@@ -77,19 +77,13 @@ const openDoor = () => {
 const router = useRouter();
 
 async function toGarage() {
-    const { data: { user }, error: autherror } = await supabase.auth.getUser();
-    if (autherror || !user) {
-        console.error("Auth error:", autherror);
-        router.push('/garage');
-        return;
-    }
-    const { data: userP, error: err } = await supabase
-        .from('progress')
-        .update({ 'stage': 'garage' })
-        .eq('id', user.id)
-        .select('*')
-        .single();
-        router.push(`/${userP.stage || 'garage'}`);
+        const { data: { user }, error: autherror } = await supabase.auth.getUser();
+        const { error } = await supabase.from('progress')
+            .update({ stage: 'garage' })
+            .eq('id', user.id)
+            .select('*')
+            .single();
+        router.push(`/garage`)
 }
 
 const closeDoor = () => {

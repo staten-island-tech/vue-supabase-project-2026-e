@@ -4,7 +4,7 @@
             :backgroundImage="bedroombg"
             :storyText="storyLines[currentLine]"
             :nextLine="nextLine"
-            :inventory="inventory"
+            :inventory="store.inventory"
         />
         <img :src="door" class="door" v-if="!free">
         <img :src="door" class="door" @click="lockpick" v-if="!lockpicked && free" id="interactable">
@@ -33,20 +33,22 @@ import door from '@/assets/door.png';
 import ruler from '@/assets/ruler.png';
 import bobbyPin from '@/assets/bobbypin.png'
 import desk  from '@/assets/desk.png'
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { supabase } from '@/supabase';
+import { userStore } from '@/stores/userStore';
 
+const store = userStore();
 const free = ref(false)
 const lockpicked = ref(false)
 const drawerOpen = ref(false)
-const hasBobbyPin = ref(false)
-const hasRuler = ref(false)
+
+const hasBobbyPin = computed(() => store.hasItem('Bobby Pin'))
+const hasRuler = computed(() => store.hasItem('Ruler'))
 
 const router = useRouter()
-const loaded = ref(false)
-const inventory = ref([])
 const currentLine = ref(0)
+const loaded = ref(false)
 const storyLines = [
     "Mc: Ughhhh, so close to escaping that time",
     "Mc: Great. Now I'm back to square one.",
@@ -68,33 +70,31 @@ function closeDrawer(){
 }
 
 function accquireBobbypins(){
-    inventory.value.push({name: "Bobby Pin"});
-    hasBobbyPin.value = true
+    store.addItem({ name: "Bobby Pin" });
 }
 
 function accquireRuler(){
-    inventory.value.push({name: "Ruler"});
-    hasRuler.value = true
+    store.addItem({ name: "Ruler" });
 }
 
 function chairUnlock(){
-    if(inventory.value.some(i => i.name ==='Bobby Pin')){
+    if (store.hasItem('Bobby Pin')) {
         free.value = true
-    }else{
+    } else {
         alert("I need something to unlock this with...")
     }
 }
 
 function lockpick(){
-    if(inventory.value.some(i => i.name ==='Bobby Pin')){
+    if (store.hasItem('Bobby Pin')) {
         lockpicked.value = true
-    }else{
+    } else {
         alert("You're not supposed to be here")
     }
 }
 
 async function unlatch(){
-    if(inventory.value.some(i => i.name ==='Ruler')){
+    if (store.hasItem('Ruler')) {
         const { data: { user }, error: autherror } = await supabase.auth.getUser();
         const { error } = await supabase.from('progress')
             .update({ stage: 'basement' })
@@ -102,7 +102,7 @@ async function unlatch(){
             .select('*')
             .single();
         router.push(`/basement`)
-    }else{
+    } else {
         alert("I need something to unlatch this with...")
     }
 }
