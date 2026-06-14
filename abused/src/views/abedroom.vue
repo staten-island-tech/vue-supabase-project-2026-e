@@ -173,7 +173,6 @@ onMounted(()=>{
 
 
 .chair{
-    background-position: 0px;
     background-size: cover;
     position: absolute;
     top:40%;
@@ -184,15 +183,11 @@ onMounted(()=>{
 
 .waking-up{
     background-image: url(@/assets/childWakeup.png);
-    animation: wokeup 3s steps(9) 1 reverse forwards;
+    background-position: 200px;
 }
 
 .out-of-chair{
     background-image: url(@/assets/chair.png);
-}
-
-@keyframes wokeup {
-    from{background-position: 0px;}
-    to{background-position: 1800px;}
+    background-position: 0px;
 }
 </style>
