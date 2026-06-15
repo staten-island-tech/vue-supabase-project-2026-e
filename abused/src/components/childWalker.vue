@@ -48,7 +48,7 @@ const walkTo = (event) =>{
 }
 
 #child{
-    background-image: url(@/assets/childWalk.png);
+    background-image: url(/images/childWalk.png);
     background-size: cover;
     position: absolute;
     top:45%;
@@ -65,31 +65,17 @@ const walkTo = (event) =>{
 }
 
 .walking-ltr{
-    background-image: url(@/assets/childWalk.png);
     animation: walk 1s infinite steps(4);
 }
 .walking-rtl{
-    background-image: url(@/assets/childWalk.png);
     animation: walk 1s infinite steps(4), look-left 0s steps(2) forwards;
-}
-
-.open-drawerR{
-    background-image: url(@/assets/openDrawer.png);
-    animation: drawer 1s steps(3) ;
 }
 
 @keyframes walk {
     from {background-position: 0px;}
     to {background-position: 800px;}
 }
-@keyframes drawer {
-    from{background-position: 0px;}
-    to {background-image: 1200px;}
-}
-@keyframes shock {
-    from{background-position: 0px;}
-    to{background-position: 1600px;}
-}
+
 @keyframes look-left{
     from{transform: scaleX(1);}
     to{transform: scaleX(-1);}

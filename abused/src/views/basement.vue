@@ -11,7 +11,7 @@
             class="door" 
             :class="{ 'door-open': doorOpen }"
             @click="openDoor" 
-            src="@/assets/door.png"
+            src="/images/door.png"
             alt="door"
         >        
         <ChildWalker class="child-walker"/>
@@ -44,7 +44,7 @@
 <script setup>
 import ChildWalker from '@/components/childWalker.vue';
 import Gameroom from '@/components/gameroom.vue';
-import basementBg from '@/assets/basementbg.png';
+import basementBg from '/images/basementbg.png';
 import { supabase } from '@/supabase';
 import {ref, computed, onMounted} from 'vue';
 import { useRouter } from 'vue-router';

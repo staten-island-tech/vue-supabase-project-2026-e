@@ -27,12 +27,12 @@
 <script setup>
 import ChildWalker from '@/components/childWalker.vue';
 import Gameroom from '@/components/gameroom.vue';
-import bedroombg from '@/assets/bedroombg.png';
-import bed from '@/assets/bed.png';
-import door from '@/assets/door.png';
-import ruler from '@/assets/ruler.png';
-import bobbyPin from '@/assets/bobbypin.png'
-import desk  from '@/assets/desk.png'
+import bedroombg from '/images/bedroombg.png';
+import bed from '/images/bed.png';
+import door from '/images/door.png';
+import ruler from '/images/ruler.png';
+import bobbyPin from '/images/bobbypin.png'
+import desk  from '/images/desk.png'
 import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { supabase } from '@/supabase';
@@ -182,12 +182,12 @@ onMounted(()=>{
 }
 
 .waking-up{
-    background-image: url(@/assets/childWakeup.png);
+    background-image: url(/images/childWakeup.png);
     background-position: 200px;
 }
 
 .out-of-chair{
-    background-image: url(@/assets/chair.png);
+    background-image: url(/images/chair.png);
     background-position: 0px;
 }
 </style>

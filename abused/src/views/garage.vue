@@ -8,15 +8,15 @@
             :useItem="useItem"
         />
         <childWalker/>    
-        <img class="toolbox" @click="showToolbox" src="@/assets/toolbox.png" alt="toolbox">
-        <img class="magazine" @click="showMagazine" src="@/assets/box.png" alt="magazine">
+        <img class="toolbox" @click="showToolbox" src="/images/toolbox.png" alt="toolbox">
+        <img class="magazine" @click="showMagazine" src="/images/box.png" alt="magazine">
     </div>
 </template>
 
 <script setup>
 import Gameroom from '@/components/gameroom.vue';
 import childWalker from '@/components/childWalker.vue';
-import garageBg from '@/assets/garagebg.png'
+import garageBg from '/images/garagebg.png'
 import {ref} from 'vue';
 import { useRouter } from 'vue-router';
 import { supabase } from '@/supabase';
