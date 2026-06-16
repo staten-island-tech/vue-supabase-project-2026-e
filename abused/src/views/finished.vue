@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>YAY. The child escaped.</h1>
+        <button @click="restart"> Restart?</button>
     </div>
 </template>
 
@@ -11,11 +12,10 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter()
 
-onMounted( async ()=>{
+async function restart(){
     const { data: { user }, error: autherror } = await supabase.auth.getUser();
     if (autherror || !user) {
         console.error('Auth error or no user:', autherror);
-        router.push('/intro');
         return;
     }
 
@@ -27,9 +27,7 @@ onMounted( async ()=>{
     if (err) {
         console.error('Failed to delete progress:', err);
     }
-
-    router.push('/intro');
-})
+}
 </script>
 
 <style scoped>

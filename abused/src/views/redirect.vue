@@ -10,13 +10,13 @@ const router = useRouter()
 
 onMounted( async ()=>{
     const { data: { user }, error: autherror } = await supabase.auth.getUser();
-    const {data: userP, error: err} = await supabase.from('progress').select('*').eq('id', user.id).single()
-    if (userP){
+    const {data: userP, error: err} = await supabase.from('progress').select('*').eq('id', user.id).maybeSingle()
+    if (userP === null){
+        const { data: { user }, error: autherror } = await supabase.auth.getUser();
+        const {data: userP, error: err} = await supabase.from('progress').insert({id: user.id, stage: 'intro'}).select('*')
         router.push(`/${userP.stage}`)
-    }else{
-        const {data: user, error: err} = await supabase.from('progress').insert({id: user.id, stage: 'intro'}).select('*')
-        router.push(`/${user.stage}`)
-    }
+    }else{ 
+    router.push(`/${userP.stage}`)}
 })
 
 
